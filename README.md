@@ -1,4 +1,4 @@
-## ![Mylar Logo](https://github.com/mylar3/mylar3/blob/master/data/images/mylarlogo.png) Mylar3
+## ![Mylar Logo](https://github.com/MylarComics/mylar3/blob/master/data/images/mylarlogo.png) Mylar3
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/MylarComics/mylar3?color=blue&label=current%20release&sort=semver)](https://github.com/MylarComics/mylar3/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/mylar3)](https://hub.docker.com/r/linuxserver/mylar3)
@@ -12,7 +12,7 @@ It will also allow you to monitor weekly pull-lists for items belonging to said 
 Install it via git clone or via [Docker](https://hub.docker.com/r/linuxserver/mylar3)
 
 ## Documentation
-Check out our [website](mylar.nerdfirehurricane.com) for documentation!
+Check out our [website](https://mylar.nerdfirehurricane.com/) for documentation!
 
 ## Support & Discussion
 Please try to limit Github issues to bugs & enhancement requests ONLY
