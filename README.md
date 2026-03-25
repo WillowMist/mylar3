@@ -3,8 +3,6 @@
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/MylarComics/mylar3?color=blue&label=current%20release&sort=semver)](https://github.com/MylarComics/mylar3/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/mylar3)](https://hub.docker.com/r/linuxserver/mylar3)
 
-[![Discord](https://img.shields.io/discord/1486424625570254979?label=Discord&color=blue)](https://discord.gg/6qpyCZRZRB)
-
 Mylar is an automated Comic Book (cbr/cbz) downloader program for use with NZB and torrents.
 
 Mylar allows you to create a watchlist of series that it monitors for various things (new issues, updated information, etc). It will grab, sort, and rename downloaded issues.
