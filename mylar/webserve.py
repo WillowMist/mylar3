@@ -106,6 +106,22 @@ def serve_template(templatename, **kwargs):
                  'ReadingList-icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'images', 'ReadingList-icon.png'),
                  'next': os.path.join(mylar.CONFIG.HTTP_ROOT, 'images', 'next.gif'),
                  'prev': os.path.join(mylar.CONFIG.HTTP_ROOT, 'images', 'prev.gif')}
+    elif mylar.CONFIG.INTERFACE == 'graphite':
+        icons = {'icon_gear': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'icon_gear.png'),
+                 'icon_upcoming': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'icon_upcoming.png'),
+                 'icon_wanted': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'icon_wanted.png'),
+                 'icon_search': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'icon_search.png'),
+                 'discord-icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'discord-icon-carbon.png'),
+                 'github-icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'github-icon-carbon.png'),
+                 'forum-icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'forum-icon-carbon.png'),
+                 'irc-icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'irc-icon-carbon.png'),
+                 'listview_icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'listview_icon.png'),
+                 'delete_icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'delete_icon.png'),
+                 'deleteall_icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'deleteall_icon.png'),
+                 'prowl_logo': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'prowl_logo.png'),
+                 'ReadingList-icon': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'ReadingList-icon.png'),
+                 'next': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'next.gif'),
+                 'prev': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'graphite', 'images', 'prev.gif')}
     else:
         icons = {'icon_gear': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'carbon', 'images', 'icon_gear.png'),
                  'icon_upcoming': os.path.join(mylar.CONFIG.HTTP_ROOT, 'interfaces', 'carbon', 'images', 'icon_upcoming.png'),

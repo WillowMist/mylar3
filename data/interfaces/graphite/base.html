@@ -1,0 +1,1381 @@
+<%
+	import mylar
+%>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<title>Mylar ${f'- {mylar.CONFIG.INSTANCE_NAME} ' if mylar.CONFIG.INSTANCE_NAME else ''}- ${title}</title>
+	<meta name="description" content="Mylar 'graphite' interface - mobile-optimized dark theme" />
+	<meta name="author" content="Mylar" />
+	
+	<link rel="apple-touch-icon" href="images/mylarlogo.png" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="interfaces/${interface}/css/style.css?v=${mylar.CURRENT_VERSION}" />
+	<link rel="stylesheet" href="interfaces/${interface}/css/jquery-ui.css">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+	${next.headIncludes()}
+	
+	<script src="js/libs/modernizr-2.8.3.min.js"></script>
+	<script src="js/libs/jquery-1.7.2.min.js"></script>
+	<style>
+		/* Graphite Theme Custom Styles */
+		:root {
+			--graphite-bg: #2c3e50;
+			--graphite-header: #1a252f;
+			--graphite-text: #ecf0f1;
+			--graphite-accent: #3498db;
+		}
+		
+		body {
+			background-color: var(--graphite-bg);
+			color: var(--graphite-text);
+		}
+		
+		/* Override old nav styles completely */
+		header, ul#nav, #paddingheader, #nopaddingheader {
+			display: none !important;
+		}
+		
+		nav.navbar {
+			background-color: var(--graphite-header) !important;
+			border-bottom: 3px solid var(--graphite-accent) !important;
+		}
+		
+		.navbar-dark .navbar-nav .nav-link {
+			color: var(--graphite-text) !important;
+			font-size: 1rem;
+			padding: 0.5rem 1rem !important;
+		}
+		
+		.navbar-dark .navbar-nav .nav-link:hover,
+		.navbar-dark .navbar-nav .nav-link:focus {
+			color: var(--graphite-accent) !important;
+		}
+		
+		.navbar-dark .navbar-toggler {
+			border-color: var(--graphite-accent) !important;
+		}
+		
+		.navbar-dark .navbar-toggler:focus {
+			box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25) !important;
+		}
+		
+		.navbar-dark .navbar-toggler-icon {
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%233498db' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+		}
+		
+		#container {
+			max-width: 100%;
+			overflow-x: hidden;
+			position: relative;
+			padding: 0 !important;
+		}
+		
+		#container > div {
+			padding: 0.5rem !important;
+		}
+		
+		@media (max-width: 991px) {
+			#container {
+				padding: 0 !important;
+			}
+			
+			#container > div {
+				padding: 0.5rem !important;
+			}
+			
+			.container-fluid {
+				padding-left: 0.5rem !important;
+				padding-right: 0.5rem !important;
+			}
+			
+			/* Responsive text sizing */
+			h1 {
+				font-size: 1.5rem !important;
+				margin-bottom: 1rem !important;
+			}
+			
+			h2 {
+				font-size: 1.25rem !important;
+				margin-bottom: 0.75rem !important;
+			}
+			
+			h3 {
+				font-size: 1.1rem !important;
+				margin-bottom: 0.5rem !important;
+			}
+			
+			p {
+				font-size: 0.95rem !important;
+				line-height: 1.5 !important;
+			}
+			
+			/* Reduce unnecessary spacing on mobile */
+			margin-top: 0.5rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+		
+		nav.navbar {
+			padding: 0.5rem 1rem !important;
+		}
+		
+		nav.navbar .navbar-brand {
+			padding: 0 !important;
+		}
+		
+		.navbar #logo {
+			display: flex !important;
+			align-items: center !important;
+			margin-right: 2rem !important;
+			flex-shrink: 0 !important;
+		}
+		
+		.navbar #logo img {
+			max-height: 45px !important;
+			width: auto !important;
+			filter: none !important;
+			box-shadow: none !important;
+		}
+		
+		.navbar .navbar-nav {
+			gap: 0.5rem !important;
+		}
+		
+		.navbar .nav-link {
+			white-space: nowrap !important;
+			font-size: 1.4rem !important;
+		}
+		
+		#searchbar-container {
+			background-color: var(--graphite-header) !important;
+			padding: 0.5rem 1rem !important;
+			border-bottom: 1px solid #34495e !important;
+		}
+		
+		#searchbar {
+			display: flex !important;
+			gap: 0.25rem !important;
+			align-items: center !important;
+			max-width: 100% !important;
+		}
+		
+		#searchbar form {
+			display: flex !important;
+			gap: 0.25rem !important;
+			align-items: center !important;
+			box-sizing: border-box !important;
+			width: 100% !important;
+		}
+		
+		#searchbar input[type="text"] {
+			background: var(--graphite-bg) !important;
+			border: 1px solid var(--graphite-accent) !important;
+			color: var(--graphite-text) !important;
+			padding: 0.4rem 0.6rem !important;
+			font-size: 0.85rem !important;
+			flex: 1 1 auto !important;
+			box-sizing: border-box !important;
+		}
+		
+		#searchbar input[type="submit"] {
+			background-color: var(--graphite-accent) !important;
+			border: 1px solid var(--graphite-accent) !important;
+			color: white !important;
+			padding: 0.4rem 0.6rem !important;
+			cursor: pointer;
+			font-size: 0.8rem !important;
+			white-space: nowrap !important;
+			flex-shrink: 0 !important;
+		}
+		
+		#searchbar input::placeholder {
+			color: #95a5a6 !important;
+		}
+		
+		footer {
+			background: var(--graphite-header);
+			color: var(--graphite-text);
+			margin-top: 2rem;
+			padding: 1rem;
+		}
+		
+		footer a {
+			color: var(--graphite-accent);
+		}
+		
+		/* Table responsiveness for all sizes */
+		.table_wrapper {
+			overflow-x: auto !important;
+			-webkit-overflow-scrolling: touch !important;
+			overflow-y: visible !important;
+			width: 100% !important;
+		}
+		
+		table.display {
+			min-width: 100% !important;
+			width: 100% !important;
+		}
+		
+		table.display th,
+		table.display td {
+			white-space: nowrap !important;
+			padding: 0.5rem !important;
+		}
+		
+		/* Mobile Responsive Styles */
+		@media (max-width: 991px) {
+			.navbar {
+				display: flex !important;
+				flex-direction: row !important;
+				flex-wrap: wrap !important;
+				padding: 0.5rem !important;
+				align-items: center !important;
+			}
+			
+			.navbar-brand {
+				order: 1 !important;
+				flex: 0 1 auto !important;
+			}
+			
+			.navbar #logo {
+				flex: 0 1 auto !important;
+				margin-right: auto !important;
+			}
+			
+			.navbar-toggler {
+				order: 2 !important;
+				flex: 0 0 auto !important;
+				margin-left: 0.5rem !important;
+			}
+			
+			.navbar-collapse {
+				background-color: var(--graphite-header) !important;
+				padding: 0 !important;
+				margin-top: 0 !important;
+				border-radius: 0 !important;
+				width: 100% !important;
+				border-top: 1px solid #34495e !important;
+				order: 10 !important;
+				flex-basis: 100% !important;
+			}
+			
+			.navbar-nav {
+				width: 100% !important;
+				flex-direction: column !important;
+				gap: 0 !important;
+			}
+			
+			.navbar-nav .nav-item {
+				padding: 0.5rem 1rem !important;
+				border-bottom: 1px solid #34495e !important;
+				width: 100% !important;
+			}
+			
+			.navbar-nav .nav-link {
+				padding: 0 !important;
+				font-size: 1rem !important;
+			}
+			
+			#searchbar-container {
+				padding: 0.5rem !important;
+				display: flex !important;
+				width: 100% !important;
+				margin-left: 0 !important;
+				position: static !important;
+				background-color: var(--graphite-header) !important;
+				border-top: 1px solid #34495e !important;
+				order: 20 !important;
+				flex-basis: 100% !important;
+			}
+			
+			/* Mobile table styling */
+			.table_wrapper {
+				overflow-x: auto !important;
+				-webkit-overflow-scrolling: touch !important;
+				margin-bottom: 1rem !important;
+				width: 100% !important;
+			}
+			
+			table.display {
+				font-size: 0.65rem !important;
+				width: 100% !important;
+			}
+			
+			table.display th,
+			table.display td {
+				padding: 0.15rem 0.2rem !important;
+				white-space: normal !important;
+				word-break: break-word !important;
+				max-width: 60px !important;
+			}
+			
+			/* Comic column gets more width */
+			table.display th#name,
+			table.display td#name {
+				max-width: 100px !important;
+				word-break: break-all !important;
+			}
+			
+			/* Hide less important columns on mobile */
+			table.display th#year,
+			table.display td#year,
+			table.display th#published,
+			table.display td#published {
+				display: none !important;
+			}
+			
+			/* Compact progress bar */
+			.progress-container {
+				height: 15px !important;
+			}
+			
+			.progressbar-front-text {
+				font-size: 0.5rem !important;
+			}
+			
+			/* Touch-friendly buttons */
+			.btn, input[type="submit"], button {
+				min-height: 44px;
+				padding: 0.5rem 1rem;
+			}
+			
+			/* Smaller footer on mobile */
+			footer > div {
+				font-size: 0.8rem;
+			}
+		}
+		
+		/* Desktop - show full navbar */
+		@media (min-width: 992px) {
+			.navbar {
+				flex-wrap: nowrap !important;
+				flex-direction: row !important;
+				padding: 0.5rem 1rem 0.5rem 1rem !important;
+				align-items: center !important;
+				display: flex !important;
+			}
+			
+			div#searchbar {
+				position: static !important;
+				left: auto !important;
+				right: auto !important;
+				top: auto !important;
+				transform: none !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+			
+			#searchbar-container {
+				background-color: transparent !important;
+				border-bottom: none !important;
+				padding: 0 !important;
+				display: flex !important;
+				align-items: center !important;
+				position: static !important;
+				z-index: 1000 !important;
+				width: auto !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				height: auto !important;
+				margin-left: auto !important;
+			}
+			
+			#searchbar {
+				display: flex !important;
+				width: auto !important;
+				margin-left: 0 !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			
+			#searchbar form {
+				display: flex !important;
+				gap: 0.5rem !important;
+				width: auto !important;
+				align-items: center !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			
+			#searchbar input[type="text"] {
+				min-width: 150px !important;
+				width: 150px !important;
+				flex: 0 0 auto !important;
+				box-sizing: border-box !important;
+				background-color: var(--graphite-bg) !important;
+				color: var(--graphite-text) !important;
+				border: 1px solid var(--graphite-accent) !important;
+				padding: 0.4rem 0.6rem !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			
+			#searchbar input[type="submit"] {
+				padding: 0.4rem 0.8rem !important;
+				font-size: 0.9rem !important;
+				flex: 0 0 auto !important;
+				white-space: nowrap !important;
+				background-color: var(--graphite-accent) !important;
+				color: white !important;
+				border: 1px solid var(--graphite-accent) !important;
+				cursor: pointer !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			
+			#searchbar .mini-icon {
+				display: none !important;
+			}
+			
+			.navbar-collapse {
+				display: flex !important;
+				width: auto !important;
+				margin-top: 0 !important;
+				background-color: transparent !important;
+				padding: 0 !important;
+				border-top: none !important;
+				flex: 1 !important;
+				min-width: 0 !important;
+			}
+			
+			.navbar-nav {
+				flex-direction: row !important;
+				gap: 0.5rem !important;
+				margin-right: 1rem !important;
+			}
+			
+			.navbar-nav .nav-item {
+				border-bottom: none !important;
+				padding: 0 !important;
+			}
+			
+			#searchbar {
+				display: flex !important;
+				width: auto !important;
+				margin-left: 0 !important;
+			}
+			
+			#searchbar form {
+				display: flex !important;
+				gap: 0.5rem !important;
+				width: auto !important;
+				align-items: center !important;
+			}
+			
+			#searchbar input[type="text"] {
+				min-width: 150px !important;
+				width: 150px !important;
+				flex: 0 0 auto !important;
+				box-sizing: border-box !important;
+			}
+			
+			#searchbar input[type="submit"] {
+				padding: 0.4rem 0.8rem !important;
+				font-size: 0.9rem !important;
+				flex: 0 0 auto !important;
+				white-space: nowrap !important;
+				background-color: var(--graphite-accent) !important;
+				color: white !important;
+				border: 1px solid var(--graphite-accent) !important;
+				cursor: pointer !important;
+			}
+			
+			#searchbar .mini-icon {
+				display: none !important;
+			}
+		}
+		
+		/* AJAX Messages */
+		.ajaxMsg {
+			position: fixed;
+			top: 60px;
+			right: 10px;
+			z-index: 9999;
+			max-width: 90%;
+		}
+		
+		.msg {
+			padding: 1rem;
+			border-radius: 0.5rem;
+		}
+		
+		.success {
+			background-color: #27ae60;
+			color: white;
+		}
+		
+		.error {
+			background-color: #e74c3c;
+			color: white;
+		}
+		
+		/* Override Bootstrap colors for dark theme */
+		.btn-primary {
+			background-color: var(--graphite-accent);
+			border-color: var(--graphite-accent);
+		}
+		
+		.btn-primary:hover {
+			background-color: #2980b9;
+			border-color: #2980b9;
+		}
+		
+		/* Mobile responsive forms and buttons */
+		@media (max-width: 991px) {
+			input[type="text"]:not(#searchbar input),
+			input[type="password"],
+			input[type="email"],
+			input[type="number"],
+			input[type="date"],
+			input[type="time"],
+			input[type="search"],
+			textarea,
+			select {
+				font-size: 16px !important; /* Prevent zoom on iOS */
+				padding: 0.75rem !important;
+				width: 100% !important;
+				max-width: 100% !important;
+				box-sizing: border-box !important;
+				margin-bottom: 0.5rem !important;
+			}
+			
+			button:not(#searchbar input),
+			input[type="button"]:not(#searchbar input),
+			input[type="submit"]:not(#searchbar input),
+			input[type="reset"],
+			.btn {
+				font-size: 16px !important;
+				padding: 0.75rem 1.5rem !important;
+				width: auto !important;
+				min-height: 44px !important; /* Apple touch target minimum */
+				margin: 0.25rem !important;
+				cursor: pointer !important;
+				border-radius: 4px !important;
+			}
+			
+			/* Stack form elements in mobile, but not searchbar */
+			form:not(#searchbar form) {
+				display: flex !important;
+				flex-direction: column !important;
+			}
+			
+			form label {
+				font-size: 0.95rem !important;
+				margin-bottom: 0.25rem !important;
+				margin-top: 0.5rem !important;
+			}
+			
+			/* Make checkboxes/radios easier to tap */
+			input[type="checkbox"],
+			input[type="radio"] {
+				width: 18px !important;
+				height: 18px !important;
+				margin-right: 0.5rem !important;
+				cursor: pointer !important;
+			}
+			
+			label {
+				cursor: pointer !important;
+				display: flex !important;
+				align-items: center !important;
+				margin-bottom: 0.5rem !important;
+			}
+			
+		/* Mobile expandable table rows */
+		@media (max-width: 991px) {
+			table.display tbody tr {
+				cursor: pointer !important;
+			}
+			
+			table.display tbody tr:hover {
+				background-color: #34495e !important;
+			}
+		}
+		
+		/* Mobile alphabet selector */
+		.alphabet-mobile {
+				width: 100% !important;
+				padding: 0.5rem !important;
+				font-size: 1rem !important;
+				background-color: #2c3e50 !important;
+				color: #ecf0f1 !important;
+				border: 1px solid #3498db !important;
+				margin: 0.5rem 0 !important;
+				box-sizing: border-box !important;
+			}
+			
+			#alphabetSearch {
+				display: flex !important;
+				flex-wrap: wrap !important;
+				gap: 0.25rem !important;
+			}
+		}
+		
+		/* Desktop: show alphabet spans, hide select */
+		@media (min-width: 992px) {
+			.alphabet-mobile {
+				display: none !important;
+			}
+		}
+		
+		/* Mobile: show select, hide alphabet spans */
+		@media (max-width: 991px) {
+			#alphabetSearch {
+				display: none !important;
+			}
+			
+			.alphabet-mobile {
+				display: block !important;
+			}
+		}
+	</style>
+</head>
+<body>
+        <%
+              mylar.DONATEBUTTON = True
+        %>
+         	<div id="container">
+                <div id="ajaxMsg" class="ajaxMsg"></div>
+                <div id="updatediv"></div>
+		
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container-fluid">
+				<div id="logo">
+					<a href="home"><img class="mylarload" src="images/mylarlogo.png" alt="mylar" style=""></a>
+				</div>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav me-auto">
+						<li class="nav-item">
+                                                <a class="nav-link" href="upcoming">
+                                                    <i class="bi bi-clock"></i> Wanted
+                                                </a>
+                                                </li>
+						<li class="nav-item">
+							<a class="nav-link" href="pullist">
+                                                        <i class="bi bi-calendar-week"></i> This Week
+                                                        %if mylar.PULLNEW == 'no':
+                                                           <span class="badge bg-secondary"> </span>
+                                                        %else:
+                                                           <span class="badge bg-success"> </span>
+                                                        %endif
+                                                    </a>
+                                                </li>
+						<li class="nav-item"><a class="nav-link" href="manage"><i class="bi bi-folder"></i> Manage</a></li>
+						<li class="nav-item"><a class="nav-link" href="storyarc_main"><i class="bi bi-book"></i> StoryArcs</a></li>
+						<li class="nav-item"><a class="nav-link" href="history"><i class="bi bi-clock-history"></i> History</a></li>
+						<li class="nav-item"><a class="nav-link" href="config"><i class="bi bi-gear"></i> Settings</a></li>
+					</ul>
+				</div>
+				<div id="searchbar-container">
+					<div id="searchbar">
+						<form action="searchit" method="get">
+							<input type="text" value="" placeholder="Search" onfocus="if(this.value==this.defaultValue) this.value='';" name="name"/>
+							<span class="mini-icon"></span>
+							<input type="submit" value="Search" onclick="flippylogo();"/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div id="main" class="main container-fluid">
+			<div id="subhead">
+				${next.headerIncludes()}
+			</div>
+			${next.body()}
+		</div>
+
+		<footer>
+			<div class="row">
+				<div class="col-12 col-md-6 text-center text-md-start">
+					<div id="actions">
+						<small>
+						<a href="shutdown"><i class="bi bi-power"></i> Shutdown</a> |
+						<a href="restart"><i class="bi bi-arrow-repeat"></i> Restart</a> |
+                                                %if mylar.CONFIG.AUTHENTICATION > 0:
+                                                    <a href="auth/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                                %endif
+                                                <br class="d-md-none">
+                                                <span id="testing"><a href="#" onclick="check_the_hub()"><i class="bi bi-arrow-repeat"></i> <span id="version_line">Check for new version</span></a></span>
+					 	</small>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 text-center text-md-end">
+					<div id="version">
+                                                <small>Version: <em>
+                                                %if mylar.CURRENT_VERSION_NAME:
+                                                    ${mylar.CURRENT_VERSION_NAME}
+                                                %else:
+                                                    ${mylar.CURRENT_VERSION}
+                                                %endif
+                                                </em>
+						(${mylar.CONFIG.GIT_BRANCH})</small>
+					</div>
+				</div>
+			</div>
+                        <div class="row mt-2">
+                        	<div class="col-12 text-center">
+					<p class="network-status info-box"></p>
+					<div id="backendstatus">
+						<small>Status: CV 
+	                                    %if mylar.BACKENDSTATUS_CV == 'up':
+	                                        <i class="bi bi-check-circle text-success"></i>
+	                                    %else:
+	                                        <i class="bi bi-x-circle text-danger"></i>
+	                                    %endif
+	                                , WS 
+	                                    %if mylar.BACKENDSTATUS_WS == 'up':
+	                                        <i class="bi bi-check-circle text-success"></i>
+	                                    %else:
+	                                        <i class="bi bi-x-circle text-danger"></i>
+	                                    %endif
+	                                <br>
+						<%
+	                                    mylar.PROVIDER_STATUS = {}
+	                                    prov_fail = False
+	                                    try:
+	                                        for ko, vo in sorted(mylar.CONFIG.PROVIDER_ORDER.items()):
+	                                            mylar.PROVIDER_STATUS.update({vo : 'success'})
+	                                            for kb in mylar.PROVIDER_BLOCKLIST:
+	                                                if vo == kb['site']:
+	                                                    mylar.PROVIDER_STATUS.update({vo : 'fail'})
+	                                                    break
+	                                    except Exception:
+	                                        prov_fail = True
+	                                %>
+	                                Providers:
+	                                %if prov_fail:
+	                                    <span title="This should correct itself eventually"><i class="bi bi-x-circle text-danger"></i> Unable to determine Provider Status' at this time...</span>
+	                                %else:
+	                                    %for prov, stats in sorted(mylar.PROVIDER_STATUS.items()):
+	                                        <%
+	                                            if stats == 'success':
+	                                                st_image = '<i class="bi bi-check-circle text-success"></i>'
+	                                            else:
+	                                                st_image = '<i class="bi bi-x-circle text-danger"></i>'
+	                                        %>
+	                                        ${prov}:${st_image} &nbsp
+	                                    %endfor
+	                                %endif
+					</small>
+                        	</div>
+                        </div>
+                        %if mylar.DONATEBUTTON:
+                        <div class="row mt-2">
+                        	<div class="col-12 text-center">
+                        	    <div id="donate">
+                                	<a href="config#donate"><img src="images/donate.png" height="25" width="120"></a>
+                            	    </div>
+                        	</div>
+                        </div>
+                        %endif
+                        <div id="config_messages_dialog" title="configuration checks / warnings" style="display:none">
+                           <span id="mbody"></span>
+                        </div>
+                        <div style="text-align:right;position:relative;top:-7px">
+                            <a id="notifs" title="View Latest Notifications" href="javascript:void(0)" onclick="manageNotifications()"><img src="images/notif.png" height="31" width="25" /></a>
+                            <div id="notifs_dialog" title="Notifications" style="display:none">
+                               <div id="btn_container">
+                                   <div id="btn_notifs" style="float:right;padding-bottom:5px;margin-top:0px;">
+                                       <a id="menu_link_always" onclick="always_notifs()" href="#"><span id="always_the_notifs" title="Force notification display to be always on top" value="modal">Always on Top</span></a>
+                                       <a id="menu_link_edit" onclick="clear_notifs()" href="#"><span id="clear_notifs" title="Clear notifications for current session">Clear notifications</span></a>
+                                   </div>
+                                </div>
+
+                                <div class="table_wrapper" id="notifs_wrapper">
+                                 <table class="display_notifs" id="notifs_table">
+                                     <thead>
+                                         <tr>
+                                             <th id="date">Date</th>
+                                             <th id="message">Message</th>
+                                             <th id="comicid">ComicID</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                     </tbody>
+                                 </table>
+                                </div>
+                            </div>
+                        </div>
+		</footer>
+		<a href="#main" id="toTop" class="btn btn-primary btn-sm" style="position:fixed;bottom:20px;right:20px;display:none;"><i class="bi bi-arrow-up"></i></a>
+	</div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/libs/jquery-ui.min.js"></script>
+        <script src="js/common.js"></script>
+	
+	${next.javascriptIncludes()}
+	
+	<script src="js/plugins.js"></script>
+	<script src="js/script.js"></script>
+	<!--[if lt IE 7 ]>
+	<script src="js/libs/dd_belatedpng.js"></script>
+	<script> DD_belatedPNG.fix('img, .png_bg');</script>
+	<![endif]-->
+        <script>
+        var sse_key = "${sse_key}";
+        var api_line = "api?cmd=checkGlobalMessages&apikey="+sse_key;
+        const evtSource = new EventSource(api_line)
+
+        evtSource.addEventListener("shutdown", function(e){
+            console.log('shutting down....');
+            evtSource.close();
+        }, false);
+
+        evtSource.addEventListener("addbyid", function(e){
+            if (e.data){
+                var data = JSON.parse(e.data);
+                var cid = retrieve_comicid();
+                if (data.status == 'mid-message-event' && data.comicid == cid && document.getElementById("page_name").value == 'series_detail'){
+                    reload_tabs();
+                    if (data.comicname != null || data.comicname != 'None'){
+                        title_loadings(data.comicname, data.seriesyear, data.comicid, data.message);
+                    }
+                } else {
+                    if (document.getElementById("page_name").value != 'series_detail' && data.comicid != cid && data.status != 'mid-message-event') {
+                        console.log('addbyid:'+data.status, data.comicid, data.table, data.message);
+                        $('#ajaxMsg').removeClass();
+                        var dspline = '</br></br><input type="button" value="View Series" onclick="location.href=\'comicDetails?ComicID='+data.comicid+'\';"/>';
+                        $('#ajaxMsg').html("<div class='msg'>"+data.message+dspline+"</div>");
+                        $('#ajaxMsg').addClass('success').fadeIn().delay(5000).fadeOut();
+                        if (data.comicname != null || data.comicname != 'None'){
+                            title_loadings(data.comicname, data.seriesyear, data.comicid, data.message);
+                        }
+                    } else if (data.status != 'mid-message-event'){
+                        $('#ajaxMsg').removeClass();
+                        $('#ajaxMsg').html("<div class='msg'>"+data.message+"</div>");
+                        $('#ajaxMsg').addClass('success').fadeIn().delay(5000).fadeOut();
+                        if (data.comicname != null || data.comicname != 'None'){
+                            title_loadings(data.comicname, data.seriesyear, data.comicid, data.message);
+                        }
+                    }
+                }
+            }
+        }, false);
+
+        evtSource.addEventListener("scheduler_message", function(e){
+            if (e.data){
+                var data = JSON.parse(e.data);
+                console.log('scheduler:'+data.status,data.message);
+                $('#ajaxMsg').removeClass();
+                $('#ajaxMsg').html("<div class='msg'>"+data.message+"</div>");
+                if (data.status == 'success'){
+                    $('#ajaxMsg').addClass('success').fadeIn().delay(3000).fadeOut();
+                } else {
+                    $('#ajaxMsg').addClass('error').fadeIn().delay(3000).fadeOut();
+                }
+            }
+        }, false);
+
+        evtSource.addEventListener("config_check", function(e){
+            if (e.data){
+                var data = JSON.parse(e.data);
+                console.log('config_check:'+data.status,data.message);
+                $("#mbody").html(data.message);
+                $("#config_messages_dialog").dialog({
+                  modal: true,
+                  width: "50%",
+                });
+            }
+        }, false);
+
+        evtSource.addEventListener("check_update", function(e){
+            if (e.data){
+                var data = JSON.parse(e.data);
+                console.log('update_msg:'+data.current_version, data.latest_version, data.commits_behind, data.status, data.docker);
+                $('#ajaxMsg').removeClass();
+                cck = "$('#updatebar').slideUp('slow');"
+                dc_behind = parseInt(data.commits_behind)
+                uptodate = false;
+                if (data.commmits_behind < 0){
+                    if (data.docker == 'true'){
+                        up_mess = 'You are running an unknown version of Mylar3. <a href="#" onclick="'+cck+'">Close</a>';
+                        up_linemess = '<span class="version_display">Unknown version</span>';
+                    } else {
+                        up_mess = 'You are running an unknown version of Mylar3. <a href="update">Update</a> or <a href="#" onclick="'+cck+'">Close</a>';
+                        up_linemess = '<a href="#" onclick="update_mylar()" title="You are running an Unknown version. Click to update" class="version_display"/>Unknown version</a>';
+                    }
+                } else if (data.current_version != data.latest_version && dc_behind > 0){
+                    if (data.docker == 'true'){
+                        up_mess = 'A <a href="https://github.com/mylar3/mylar3/compare/'+data.current_version+'...'+data.latest_version+'" target="_blank"> newer version</a> is availble. You are '+dc_behind+' commits behind. <a href="#" onclick="'+cck+'">Close</a>';
+                        up_linemess = '<span class="version_display">'+dc_behind+' commits behind</span>';
+                    } else {
+                        up_mess = 'A <a href="https://github.com/mylar3/mylar3/compare/'+data.current_version+'...'+data.latest_version+'" target="_blank"> newer version</a> is availble. You are '+dc_behind+' commits behind. <a href="update">Update</a> or <a href="#" onclick="'+cck+'">Close</a>';
+                        up_linemess = '<a href="#" onclick="location.href=\'update\';" title="Update now" class="version_display">'+dc_behind+' commits behind</a>';
+                    }
+                } else if (data.current_version == data.latest_version && dc_behind === 0){
+                    up_linemess = '<span class="version_display">No updates available</span>';
+                    uptodate = true;
+                } else {
+                    up_linemess = '???'
+                }
+
+                if (uptodate === true){
+                    $("#testing").html('<span title="Mylar is up-to-date">'+up_linemess+'</span>');
+                    $('#updatediv').html("<div id='updatebar'>Mylar is up to date</div>").fadeIn().delay(3000).fadeOut();
+                } else {
+                    $('#updatediv').html("<div id='updatebar'>"+up_mess+"</div>").fadeIn().delay(5000).fadeOut();
+                    $("#testing").html(up_linemess);
+                }
+                var startTime = new Date().getTime();
+                var interval = setInterval(function(){
+                    if (new Date().getTime() - startTime > 60000){
+                        clearInterval(interval);
+                        $("#testing").html('<a href="#" onclick="check_the_hub()"><span class="ui-icon ui-icon-refresh"></span><span id="version_line">Check for new version</span></a>');
+                        return;
+                    }
+                }, 2000);
+            }
+        }, false);
+
+        evtSource.addEventListener('message', function(e){
+            if ('END-OF-STREAM' == e.data) {
+                evtSource.close();
+            } else {
+                if(typeof(evtSource) === "undefined" || e.data === null){
+                   evtSource.close();
+                }
+                if (e.data){
+                    var data = JSON.parse(e.data);
+                    console.log(data.status, data.comicid, data.tables, data.message);
+                    if (data.status != 'mid-message-event'){
+                        $('#ajaxMsg').removeClass();
+                        $('#ajaxMsg').html("<div class='msg'><center>"+data.message+"</center></div>");
+                    }
+                    var cid = retrieve_comicid();
+                    var tt = document.getElementById("page_name");
+                    if (data.status == 'success'){
+                        $('#ajaxMsg').addClass('success').fadeIn().delay(3000).fadeOut();
+                        console.log('data.comicid:'+data.comicid)
+                        if ( ( tt.value != "config" ) && ( tt.value != "cblimport") && (data.tables == 'both' || data.tables == 'tables') && ( document.body.innerHTML.search(data.comicid) || tt.value == "history" || tt.value == "search_results") ){
+                            console.log('reloading table1...');
+                            reload_table();
+                        }
+                        else if ( (data.tables == 'both' || data.tables == 'tables') && (data.comicid == cid) ){
+                            console.log('reloading table2...');
+                            reload_table();
+                        }
+                        if ( (data.tables == 'both' || data.tables == 'tabs') && ( tt.value != "config") ) {
+                            reload_tabs();
+                        }
+                        if( data.comicid == cid && document.getElementById("page_name").value == 'series_detail'){
+                            console.log('title_loading...');
+                            if (data.comicname != null || data.comicname != 'None'){
+                                title_loadings(data.comicname, data.seriesyear, data.comicid, data.message);
+                            }
+                        }
+                    } else if (data.status == 'failure') {
+                        $('#ajaxMsg').addClass('error').fadeIn().delay(3000).fadeOut();
+                        if ( (data.tables == 'both' || data.tables == 'tables') && ( document.body.innerHTML.search(data.comicid) || tt.value == 'history' || tt.value == 'search_results') ){
+                            console.log('reloading table1...');
+                            reload_table();
+                        }
+                        else if ( (data.tables == 'both' || data.tables == 'tables') && (data.comicid == cid) ){
+                            console.log('reloading table2...');
+                            reload_table();
+                        }
+                        if (data.tables == 'both' || data.tables == 'tabs'){
+                            reload_tabs();
+                        }
+                        if( data.comicid == cid && document.getElementById("page_name").value == 'series_detail' ){
+                            if (data.comicname != null || data.comicname != 'None'){
+                                title_loadings(data.comicname, data.seriesyear, data.comicid);
+                            }
+                        }
+                    };
+                }
+            }
+        }, false);
+
+        function retrieve_comicid() {
+            try {
+                comicidval = document.getElementById("ComicID").value;
+            }
+            catch(err) {
+                comicidval = "00000";
+            }
+            finally {
+                return comicidval;
+            }
+        }
+
+        function update_mylar(){
+            "location.href=\'comicDetails?ComicID='+data.comicid+'\';"/
+            $.ajax({
+                 type: "GET",
+                 url: "update",
+                 success: function(response) {
+                 },
+                 error: function(data)
+                     {
+                       alert('ERROR'+data.responseText);
+                     },
+            })
+        }
+
+        function reload_table() {
+            var tables = $('table.display').DataTable();
+            var tt = document.getElementById("page_name");
+            if(typeof(tt) != 'undefined' && tt != null){
+                if (tt.value != "weekly" && tt.value != "import_results" && tt.value != "manage_comics" && tt.value != "manage_issues" && tt.value != "manage_failed" && tt.value != "reading_list" && tt.value != "storyarcs_index" && tt.value != "storyarc_detail" && tt.value != "config") {
+                    tables.ajax.reload(null,false);
+                }
+            }
+
+            if ( $('#notifs_dialog').dialog('isOpen') === true){
+                console.log('notifs_dialog open');
+                try {
+                    if ( $.fn.dataTable.isDataTable( '#notifs_table' ) ) {
+                        var t2 = $('table.display_notifs').DataTable();
+                        t2.ajax.reload(null,false);
+                    } else {
+                        data_the_table();
+                    }
+                } catch(err) {
+                    console.log('notif table not initialised');
+                    data_the_table();
+                }
+            }
+        }
+
+        function reload_tabs() {
+            console.log('reloading tabs..');
+            var url =  $(location).attr('href');
+            if (url.includes("&addbyid")){
+                lenc = url.indexOf("&addbyid=");
+                bed = lenc.length + 1;
+                url = url.substring(0,lenc)+url.substring(lenc+10);
+            }
+            var tabId = $('.ui-tabs-panel:visible').attr("id");
+            $('.ui-tabs-panel:visible').load(url + " #"+ tabId, function() {
+                $("#tabs").tabs({
+                    cache: false,
+                });
+            });
+        }
+
+        function title_loadings(series_c_name,series_c_year, series_comicid, s_message) {
+            var tt = document.getElementById("page_name");
+            if (tt.value == "series_detail"){
+                ignore_block = false;
+                if (typeof(s_message) != 'undefined' && s_message != null){
+                    var series_c_url = 'comicDetails?ComicID='+series_comicid;
+                    console.log('series_c_name:'+series_c_name);
+                    console.log('s_message:'+s_message);
+                    var s_status = document.getElementById("series_status");
+                    var s_status_spinner = document.getElementById("loading_spinner");
+                    var status_hidden = document.getElementById("status_hidden").value;
+                    console.log('status:'+status_hidden);
+                    console.log('successfully added:'+s_message.search("Successfully added"));
+                    console.log('successfully refreshed:'+s_message.search("Successfully refreshed"));
+                    if ((s_message.search("Successfully added") == 0 || s_message.search("Successfully refreshed") == 0 || status_hidden != 'Loading') ) {
+                        console.log('not blocking');
+                        s_status.style.display = "none";
+                        s_status.innerHTML = '';
+                        s_status_spinner.style.display = "none";
+                    } else if (typeof(series_c_name) != 'undefined' && series_c_name != null){
+                        console.log('blocking');
+                        s_status.style.display = "block";
+                        s_status.innerHTML = '(Comic information is currently being loaded)';
+                        s_status_spinner.style.display = "block";
+                        ignore_block = true;
+                    }
+                } else {
+                    console.log('else..');
+                    var status_hidden = document.getElementById("status_hidden").value;
+                    if (status_hidden == 'loading'){
+                        console.log('loading status');
+                        document.getElementById("series_status").style.display = "block";
+                        document.getElementById("series_status").innerHTML = '(Comic information is currently being loaded)';
+                        document.getElementById("loading_spinner").style.display = "block";
+                    }
+                    series_c_name = document.getElementById("tab_comicname").value;
+                    series_c_year = document.getElementById("tab_comicyear").value;
+                    series_c_url = document.getElementById("tab_comicdetailurl").value;
+                }
+                if (ignore_block === false){
+                    console.log('ignore_block:'+ignore_block);
+                    var series_line = document.getElementById("series_line");
+                    series_line.innerHTML = '<a href="'+series_c_url+'" target="_blank">'+series_c_name+' ('+series_c_year+')</a>';
+                    console.log(series_line.innerHTML);
+                    document.title = 'Mylar - '+series_c_name;
+                }
+            }
+        }
+
+        function check_the_hub(){
+            update_line();
+            $.when($.ajax({
+                 type: "GET",
+                 url: "checkGithub",
+                 success: function(response) {
+                 },
+                 error: function(data)
+                     {
+                       alert('ERROR'+data.responseText);
+                     },
+            })).done(function(data) {
+                $("#version_line").html('Check for new version');
+            });
+        }
+
+        function clear_notifs(){
+            $.when($.ajax({
+                 type: "GET",
+                 url: "clear_notifs",
+                 data: { session_id:  "${mylar.SESSION_ID}" },
+                 success: function(response) {
+                     obj = JSON.parse(response);
+                     $('#ajaxMsg').html("<div class='msg'><span class='ui-icon ui-icon-check'></span>"+obj['message']+"</div>");
+                     if (obj['status'] == 'success'){
+                         $('#ajaxMsg').addClass('success').fadeIn().delay(3000).fadeOut();
+                     } else {
+                         $('#ajaxMsg').addClass('error').fadeIn().delay(3000).fadeOut();
+                     }
+                 },
+                 error: function(data)
+                     {
+                       alert('ERROR'+data.responseText);
+                     },
+            })).done(function(data) {
+                 notif_checks();
+            });
+        }
+
+        function always_notifs(reloads) {
+            if ( $('#notifs_dialog').dialog('isOpen') === true){
+                $("#notifs_dialog").dialog('destroy');
+            }
+            dd = document.getElementById("always_the_notifs");
+            de = document.getElementById("menu_link_always");
+            if (dd.value == 'top'){
+                console.log('not_modal')
+                tmpvalue = 'modal';  //opposite
+                de.style.background = "ffffff";
+                de.style.backgroundColor = "#ffffff";
+                de.style.backgroundImage = "-moz-linear-gradient(#599bdc, #3072b3) !important;linear-gradient(#599bdc, #3072b3) !important;-webkit-linear-gradient(#599bdc, #3072b3) !important;-o-linear-gradient(#599bdc, #3072b3) !important;";
+                de.style.filter = "progid:dximagetransform.microsoft.gradient(startColorstr=#fafafa, endColorstr=#eaeaea) !important";
+                de.style.color = "#FFF";
+                de.style.borderColor = "#272b30 #272b30 #272b30";
+                dialog_for_notifs(false);
+            } else {
+                console.log('modal')
+                tmpvalue = 'top'; //oppposite
+                de.style.background = "#3072b3";
+                de.style.backgroundColor = "#3072b3";
+                de.style.backgroundImage = "-moz-linear-gradient(#599bdc, #3072b3) !important;linear-gradient(#599bdc, #3072b3) !important;-webkit-linear-gradient(#599bdc, #3072b3) !important;-o-linear-gradient(#599bdc, #3072b3) !important;";
+                de.style.filter = "progid:dximagetransform.microsoft.gradient(startColorstr=#fafafa, endColorstr=#eaeaea) !important";
+                de.style.color = "#FFF";
+                de.style.borderColor = "#3072b3 #3072b3 #3072b3";
+                dialog_for_notifs(true);
+            }
+            if(typeof(reloads) === "undefined" || reloads === null){
+                notif_checks();
+            }
+            dd.value = tmpvalue;
+        }
+
+        function dialog_for_notifs(modal_value){
+            $("#notifs_dialog").dialog({
+                create: function(event, ui) {
+                    $(event.target).parent().css('position', 'fixed');
+                },
+                resizeStop: function(event, ui) {
+                    var position = [(Math.floor(ui.position.left) - $(window).scrollLeft()),
+                                     (Math.floor(ui.position.top) - $(window).scrollTop())];
+                    $(event.target).parent().css('position', 'fixed');
+                    $("#notifs_dialog").dialog('option','position',position);
+                },
+                modal: modal_value,
+                width: "70%",
+            });
+        }
+
+        window.addEventListener("beforeunload", function (event) {
+            if (document.getElementById("always_the_notifs").value == 'top'){
+                dialog_for_notifs(false);
+            }
+        });
+
+        document.onkeyup=function(e){
+            var e = e || window.event;
+            if (e.altKey && e.which == 78) {
+                console.log('alt_N combo');
+                manageNotifications();
+            }
+        }
+
+        function manageNotifications() {
+            dialog_for_notifs(true);
+            always_notifs();
+        }
+
+        function notif_checks(){
+            try {
+                if ( $.fn.dataTable.isDataTable( '#notifs_table' ) ) {
+                    console.log('boom1');
+                    var t2 = $('table.display_notifs').DataTable();
+                    t2.ajax.reload(null,false);
+                } else {
+                    console.log('boom2');
+                    data_the_table();
+                }
+            } catch(err) {
+                console.log('boom3');
+                console.log('manage - no notifs table');
+                data_the_table();
+            }
+        }
+
+        function flippylogo() {
+            $('img.mylarload').addClass('spinny').removeClass('lastgood').removeClass('lastbad');
+        }
+
+        function update_line() {
+            $('#version_line').html('<span class="loadingdots">Checking for update</span>');
+        }
+
+        function check_the_update(){
+            var updateval = JSON.parse('${pre_update}');
+            if (updateval['update_value'] === 0){
+                up_linemess = '<span class="version_display">No updates available</span>';
+                var startTime = new Date().getTime();
+                var interval = setInterval(function(){
+                    if (new Date().getTime() - startTime > 60000){
+                        clearInterval(interval);
+                        $("#testing").html('<a href="#" onclick="check_the_hub()"><span class="ui-icon ui-icon-refresh"></span><span id="version_line">Check for new version</span></a>');
+                        return;
+                    }
+                }, 2000);
+            } else if (updateval['update_value'] > 0){
+                if (updateval['docker'] == 'true'){
+                    up_linemess = '<a href="#" title="you must manually update your docker" class="version_display">'+updateval['update_value']+' commits behind</a>';
+                } else {
+                    up_linemess = '<a href="#" onclick="location.href=\'update\';" title="Update now" class="version_display">'+updateval['update_value']+' commits behind</a>';
+                }
+            } else if (updateval['update_value'] == -1){
+                if (updateval['docker'] == 'true'){
+                    up_linemess = '<a href="#" title="You are running an Unknown version" class="version_display">Unknown version</a>';
+                } else {
+                    up_linemess = '<a href="#" onclick="update_mylar()" title="You are running an Unknown version" class="version_display">Unknown version</a>';
+                }
+            } else {
+                up_linemess = '<a href="#" onclick="check_the_hub()"><span class="ui-icon ui-icon-refresh"></span><span id="version_line">Check for new version</span></a>';
+            }
+                $("#testing").html(up_linemess);
+        }
+
+        function data_the_table(){
+            $('#notifs_table').dataTable( {
+                "preDrawCallback": function (settings){
+                },
+                "sDom": '<"clear">t<"clear"p>',
+                "processing": true,
+                "serverSide": true,
+                "ajaxSource": 'manageNotifs',
+                "destroy": true,
+                "ajax": {
+                    "data": function (d) {
+                        d.session_id = "${mylar.SESSION_ID}",
+                        d.modal = document.getElementById("always_the_notifs").value
+                    },
+                },
+                "columnDefs": [
+                    {
+                       "sortable": true,
+                       "targets": [ 0 ],
+                       "visible": true,
+                       "render":function (data,type,full) {
+                           return full[0];
+                       }
+                    },
+                    {
+                       "sortable": true,
+                       "targets": [ 1 ],
+                       "visible": true,
+                       "render":function (data,type,full) {
+                            return full[1];
+                       }
+                    },
+                    {
+                       "sortable": true,
+                       "targets": [ 2 ],
+                       "visible": true,
+                       "render":function (data,type,full) {
+                           if (full[2]){
+                               return '<a href="comicDetails?ComicID='+full[2]+'">'+full[2]+'</a>';
+                           } else {
+                               return null;
+                           }
+                       }
+                    },
+                ],
+                "paginationType": "simple_numbers",
+                "displayLength": 25,
+                "stateSave": true,
+                "lengthMenu": [[10, 15, 25, 50, 100, 200, -1], [10, 15, 25, 50, 100, 200, 'All' ]],
+                "language": {
+                     "lengthMenu": "Show _MENU_ items per page",
+                     "emptyTable": "No information available",
+                     "infoEmpty": "Showing 0 to 0 of 0 lines",
+                },
+                "rowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                     nRow.children[0].id = 'date';
+                     nRow.children[1].id = 'message';
+                     nRow.children[2].id = 'comicid';
+                     return nRow;
+                },
+                "drawCallback": function (o) {
+                },
+                "serverData": function ( sSource, aoData, fnCallback ) {
+                     aoData.push({"name": "paging_session_id", "value": "${mylar.SESSION_ID}" });
+                     aoData.push({"name": "modal_p", "value": document.getElementById("always_the_notifs").value });
+                     $.getJSON(sSource, aoData, function (json) {
+                        if (json.modal){
+                            console.log('returned_modal_value:'+json.modal);
+                            if (json.modal != document.getElementById("always_the_notifs").value){
+                                document.getElementById("always_the_notifs").value = json.modal;
+                            }
+                            always_notifs(false);
+                        }
+                        fnCallback(json)
+                     });
+                },
+                "fnInitComplete": function(oSettings, json)
+                {
+                },
+            });
+        }
+
+        $(document).ready(function() {
+            check_the_update();
+            // Show/hide back-to-top button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 100) {
+                    $('#toTop').fadeIn();
+                } else {
+                    $('#toTop').fadeOut();
+                }
+            });
+            $('#toTop').click(function() {
+                $('html, body').animate({scrollTop: 0}, 300);
+                return false;
+            });
+        });
+        </script>
+</body>
+</html>
+
+<%def name="javascriptIncludes()"></%def>
+<%def name="headIncludes()"></%def>
+<%def name="headerIncludes()"></%def>
