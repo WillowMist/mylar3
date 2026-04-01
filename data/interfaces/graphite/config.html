@@ -5,12 +5,15 @@
 %>
 
 <%def name="headerIncludes()">
-	<div id="subhead_container">
-		<div id="subhead_menu">
-			<a id="menu_link_carepackage" href="carepackage">Care Package</a>
-			<a id="menu_link_shutdown" href="shutdown">Shut Down</a>
-			<a id="menu_link_shutdown" href="restart">Restart</a>
-                        <a id="menu_link_edit" title="Manage blocked Providers" href="javascript:void(0)" onclick="manageBlockedProviders()">Provider Blocklist</a>
+</%def>
+<%def name="body()">
+        <input type="hidden" id="page_name" value="config" />
+        <div style="margin-top:60px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+			<a id="menu_link_carepackage" href="carepackage" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Care Package</a>
+			<a id="menu_link_shutdown" href="shutdown" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Shut Down</a>
+			<a id="menu_link_shutdown" href="restart" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Restart</a>
+                        <a id="menu_link_edit" title="Manage blocked Providers" href="javascript:void(0)" onclick="manageBlockedProviders()" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Provider Blocklist</a>
                         <div id="manage_blocked_providers_dialog" title="Choose a specific provider to Unblock" style="display:none">
                             <table id="blocked_table" width="100%">
                                 <thead>
@@ -25,10 +28,7 @@
                             </table>
                         </div>
 		</div>
-	</div>
-</%def>
-<%def name="body()">
-        <input type="hidden" id="page_name" value="config" />
+        </div>
 
         <%
              mylar.DONATEBUTTON = False

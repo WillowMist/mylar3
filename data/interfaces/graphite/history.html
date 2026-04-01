@@ -4,20 +4,20 @@
 %>
 
 <%def name="headerIncludes()">
-	<div id="subhead_container">
-		<div id="subhead_menu">
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=all',$(this),'table')" data-success="All History cleared">Clear All History</a>
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Processed',$(this),'table')" data-success="All Processed cleared">Clear Processed</a>
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Unprocessed',$(this),'table')" data-success="All Unprocessed cleared">Clear Unprocessed</a>
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Snatched',$(this),'table')" data-success="All Snatched cleared">Clear Snatched</a>
-                        <a id="menu_link_delete" href="#" onclick="doAjaxCall('wipenzblog',$(this),'table')" data-success="Wiped entire NZB DB">Wipe NZBLOG</a>
-                        <a id="menu_link_delete" href="logs">View Logs</a>
-		</div>
-	</div>	
 </%def>
 
 <%def name="body()">
         <input type="hidden" id="page_name" value="history" />
+        <div style="margin-top:60px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=all',$(this),'table')" data-success="All History cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear All History</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Processed',$(this),'table')" data-success="All Processed cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear Processed</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Unprocessed',$(this),'table')" data-success="All Unprocessed cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear Unprocessed</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Snatched',$(this),'table')" data-success="All Snatched cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear Snatched</a>
+                        <a id="menu_link_delete" href="#" onclick="doAjaxCall('wipenzblog',$(this),'table')" data-success="Wiped entire NZB DB" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Wipe NZBLOG</a>
+                        <a id="menu_link_delete" href="logs" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">View Logs</a>
+		</div>
+        </div>
 	<div id="paddingheader">
 		<h1 class="clearfix"><img src="images/icon_history.png" alt="History"/>History</h1>
 	</div>

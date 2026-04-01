@@ -4,16 +4,16 @@
 %>
 
 <%def name="headerIncludes()">
-	<div id="subhead_container">
-		<div id="subhead_menu">
-			<a href="#" id="menu_link_scan" onclick="doAjaxCall('forceSearch',$(this))" data-success="Checking for wanted issues successful" data-error="Error checking wanted issues">Force Check Tier-1</a>
-		</div>
-	</div>
 </%def>
 
 
 <%def name="body()">
         <input type="hidden" id="page_name" value="upcoming" />
+        <div style="margin-top:60px;">
+		<div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+			<a href="#" id="menu_link_scan" onclick="doAjaxCall('forceSearch',$(this))" data-success="Checking for wanted issues successful" data-error="Error checking wanted issues" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Force Check Tier-1</a>
+		</div>
+	</div>
 	<div class="title">
 		<h1 class="clearfix"><img src="${icons['icon_wanted']}" alt="Wanted Issues"/>Wanted Issues (<span id="wanted_count"></span>)</h1>
 	</div>

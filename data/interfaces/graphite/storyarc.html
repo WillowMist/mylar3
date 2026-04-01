@@ -7,16 +7,17 @@
 %>
 
 <%def name="headerIncludes()">
-	<div id="subhead_container">
-		<div id="subhead_menu">
-            <a id="menu_link_refresh" href="cblimport">CBL Import</a>            
-            <a id="menu_link_refresh" href="readlist">Reading List Management</a>
-		</div>
-	</div>	
 </%def>
 
 <%def name="body()">
         <input type="hidden" id="page_name" value="storyarcs_index" />
+        <div style="margin-top:60px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+            <a id="menu_link_refresh" href="cblimport" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">CBL Import</a>            
+            <a id="menu_link_refresh" href="readlist" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Reading List Management</a>
+		</div>
+        </div>
+	<div id="paddingheader">
 	<div id="paddingheader">
 		<h1 class="clearfix"><img src="${icons['ReadingList-icon']}" height="26" width="26" alt="Reading List"/>Story Arc Management</h1>
 	</div>

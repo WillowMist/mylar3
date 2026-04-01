@@ -6,52 +6,19 @@
 %>
 
 <%def name="headerIncludes()">
-	<div id="subhead_container">
-		<div id="subhead_menu">
-                        <a href="#" id="menu_link_refresh" onclick="doAjaxCall('pullist?week=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Refresh submitted.">Refresh Pull-list</a>
-                        <a href="#" id="menu_link_retry" onclick="doAjaxCall('pullrecreate?weeknumber=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Recreating Pullist for week ${weekinfo['weeknumber']}, ${weekinfo['year']}">Recreate Pull-list</a>
-<!--
-                        <a href="#" id="menu_link_retry" onclick="doAjaxCall('create_readlist?weeknumber=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Submitted request for reading-list generation for this week">Generate Reading-List</a>
--->
-                        <a href="#" id="menu_link_delete" title="Add all series to your watchlist for week ${weekinfo['weeknumber']}">Mass.Add.it.All.NOW</a>
-                           <div id="publisher_dialog" title="Mass publisher selection" style="display:none">
-                            <div name="publishers_choice" id="publishers_choice" style="vertical-align: middle; text-align: center">
-                              <div>
-                                   <label><big>Choose.Your.Publishers</big></label></br>
-                                   <small><center>to select every publisher, do not select anything</small></br></br>
-                                   <select id="publishers" name="publishers[]" multiple style="width:50%;" placeholder="Select a publisher...">
-                                   </select>
-                                   </center>
-                                   </br>
-                                   <div class="row checkbox left clearfix">
-                                      <input type="checkbox" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="auto_mass_add" id="auto_mass_add" value="1" ${auto_mass_add} /><label>Run automatically when the pull updates?</label>
-                                   </div>
-                              </div>
-                              </br>
-                              <div id="btn_container_center">
-                                  <div id="btn_menu" style="padding-bottom:5px;">
-                                      <a id="pub_button" onclick="runthem();return false;" href="#">Submit</a>
-                                  </div>
-                              </div>
-                              <input id="year" type="hidden" name="year" value="${weekinfo['year']}" />
-                              <input id="weeknumber" type="hidden" name="weeknumber" value="${weekinfo['weeknumber']}" />
-                            </div>
-                           </div>
-
-                        %if mylar.CONFIG.WEEKFOLDER:
-                            <a id="menu_link_scan" title="copy weekly snatched items into weekly folder of ${weekfold}" class="button">Download</a>
-                        %endif
-                        <a href="#" id="menu_link_refresh" title="Search for all issues marked as Wanted for week ${weekinfo['weeknumber']}" onclick="doAjaxCall('pullSearch?week=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Submitted background search request for new pull issues">Manually check for issues</a>
-                        %if all([mylar.CONFIG.ENABLE_TORRENT_SEARCH is True, mylar.CONFIG.ENABLE_32P is True, mylar.CONFIG.MODE_32P is True]):
-                            <a href="#" id="menu_link_refresh" onclick="doAjaxCall('download_0day?week=${weekinfo['midweek']}',$(this),'table')" data-success="Submitted background search request for 0-day pack for this week">Download 0-Day Pack</a>
-                        %endif
-		</div>
-	</div>
-	<a href="home" class="back">&laquo; Back to overview</a>
 </%def>
 
 <%def name="body()">
         <input type="hidden" id="page_name" value="weekly" />
+        <div style="margin-top:60px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+                        <a href="#" id="menu_link_refresh" onclick="doAjaxCall('pullist?week=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Refresh submitted." style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Refresh Pull-list</a>
+                        <a href="#" id="menu_link_retry" onclick="doAjaxCall('pullrecreate?weeknumber=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Recreating Pullist for week ${weekinfo['weeknumber']}, ${weekinfo['year']}" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Recreate Pull-list</a>
+                        <a href="#" id="menu_link_delete" title="Add all series to your watchlist for week ${weekinfo['weeknumber']}" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;" onclick="$('#publisher_dialog').dialog('open');">Mass.Add.it.All.NOW</a>
+        </div>
+        </div>
+        <a href="home" class="back">&laquo; Back to overview</a>
+
         <div>
            </br></br>
            <table width="100%" align="center">
@@ -107,26 +74,26 @@
 		<tbody>
 		%for weekly in weeklyresults:
 			<%
-                                grade = 'Z'
-				if weekly['STATUS'] == 'Wanted':
-					grade = 'X'
-				elif weekly['STATUS'] == 'Snatched':
-					grade = 'C'
-                                elif weekly['STATUS'] == 'Downloaded':
-                                        grade = 'D'
-                                elif weekly['STATUS'] == 'Paused':
-                                        grade = 'T'
-                                elif weekly['STATUS'] == 'Mismatched':
-                                        grade = 'U'
-                                if weekly['AUTOWANT'] == True:
-                                        grade = 'H'
+                        grade = 'Z'
+			if weekly['STATUS'] == 'Wanted':
+				grade = 'X'
+			elif weekly['STATUS'] == 'Snatched':
+				grade = 'C'
+                        elif weekly['STATUS'] == 'Downloaded':
+                                grade = 'D'
+                        elif weekly['STATUS'] == 'Paused':
+                                grade = 'T'
+                        elif weekly['STATUS'] == 'Mismatched':
+                                grade = 'U'
+                        if weekly['AUTOWANT'] == True:
+                                grade = 'H'
 
-                                if weekly['HAVEIT'] == 'OneOff':
-                                        grade = 'T'
+                        if weekly['HAVEIT'] == 'OneOff':
+                                grade = 'T'
 
-                                #if the comicid is present, but issue isn't marked as wanted.
-                                if any([weekly['HAVEIT'] == 'Yes', weekly['HAVEIT'] == weekly['COMICID']]) and weekly['STATUS'] == 'Skipped':
-                                        grade = 'E'
+                        #if the comicid is present, but issue isn't marked as wanted.
+                        if any([weekly['HAVEIT'] == 'Yes', weekly['HAVEIT'] == weekly['COMICID']]) and weekly['STATUS'] == 'Skipped':
+                                grade = 'E'
 
 			%>
 			<tr class="grade${grade}">
@@ -136,23 +103,23 @@
                                         <td class="comicname">
                                         %if weekly['HAVEIT'] == 'No':
                                              %if all([weekly['COMICID'] != '', weekly['COMICID'] is not None]):
-                                                 <a href="${weekly['LINK']}" target="_blank">${weekly['COMIC']}</a>
+                                                <a href="${weekly['LINK']}" target="_blank">${weekly['COMIC']}</a>
                                              %else:
-                                                 %if all([weekly['STATUS'] == 'Mismatched', weekly['LINK'] is not None]):
-                                                     <a href="${weekly['LINK']}" target="_blank">${weekly['COMIC']}</a>
-                                                 %else:
-                                                   ${weekly['COMIC']}
-                                                 %endif
+                                                %if all([weekly['STATUS'] == 'Mismatched', weekly['LINK'] is not None]):
+                                                    <a href="${weekly['LINK']}" target="_blank">${weekly['COMIC']}</a>
+                                                %else:
+                                                  ${weekly['COMIC']}
+                                                %endif
                                              %endif
                                         %else:
                                              %if weekly['HAVEIT'] == 'OneOff':
-                                                 %if all([weekly['COMICID'] != '', weekly['COMICID'] is not None]):
-                                                     <a href="${weekly['LINK']}" target="_blank" id="${weekly['ISSUEID']}">${weekly['COMIC']}</a>
-                                                 %else:
-                                                     ${weekly['COMIC']}
-                                                 %endif
+                                                %if all([weekly['COMICID'] != '', weekly['COMICID'] is not None]):
+                                                    <a href="${weekly['LINK']}" target="_blank" id="${weekly['ISSUEID']}">${weekly['COMIC']}</a>
+                                                %else:
+                                                    ${weekly['COMIC']}
+                                                %endif
                                              %else:
-                                                 <a href="comicDetails?ComicID=${weekly['COMICID']}">${weekly['COMIC']}</a>
+                                                <a href="comicDetails?ComicID=${weekly['COMICID']}">${weekly['COMIC']}</a>
                                              %endif
                                         %endif
                                         %if weekly['VOLUME'] is not None:
@@ -169,7 +136,7 @@
                                         </td>
                                         <td class="comicnumber">${weekly['ISSUE']}</td>
                                         %if weekly['AUTOWANT']:
-             	                             <td class="status">Auto-Want</td>
+       	                                     <td class="status">Auto-Want</td>
                                         %else:
                                             %if weekly['STATUS'] == 'Mismatched':
                                                 <td class="status"><a href="upcoming#tabs-3" title="View mismatch reason">${weekly['STATUS']}</a></td>
@@ -246,29 +213,6 @@
                                             %else:
                                                 <% dl = False %>
                                             %endif
-<!--
-                                            <a class="menu_link_edit" id="choose_specific_download" title="Choose Specific Download" href="javascript:void(0)" onclick="getAvailableDownloads('${weekly['ISSUEID']}', '${weekly['COMIC']}', '${weekly['COMICID']}', '${weekly['ISSUE']}', '${weekly['VOLUME']}', 'pullwant', '${weekly['PUBLISHER']}', '${weekinfo['midweek']}', '${weekinfo['weeknumber']}', '${weekinfo['year']}', '${dl}')">
-                                            %if mylar.CONFIG.SHOW_ICONS:
-                                                <img style="margin: 0px 5px" src="images/magnifier.png" height="25" width="25" class="highqual" />
-                                            %else:
-                                                <span class="ui-icon ui-icon-plus"></span>Choose
-                                            %endif
-                                            </a>
-                                            <div id="choose_specific_download_dialog" title="Search & Choose a specific download for this issue" style="display:none" class="configtable">
-                                              <table class="display" id="downloads_table">
-                                                 <thead>
-                                                   <tr>
-                                                     <th id="title">Title</th>
-                                                     <th id="provider">Provider</th>
-                                                     <th id="size">Size</th>
-                                                     <th id="kind">Kind</th>
-                                                   </tr>
-                                                 </thead>
-                                                 <tbody id="downloads_table_body" value="Now searching....this might take up to 90 seconds.">
-                                                 </tbody>
-                                              </table>
-                                            </div>
--->
                                         %elif weekly['HASH'] is not None and mylar.CONFIG.AUTO_SNATCH is True:
                                             <a href="#" onclick="doAjaxCall('torrentit?torrent_hash=${weekly['HASH']}&download=True',$(this),'table')" title="Auto-Snatch torrent file">
                                             %if mylar.CONFIG.SHOW_ICONS:
@@ -309,6 +253,30 @@
                 <td style="margin-left:5px;"><span style="border:1px solid#ccc;float:left;width:30px;height:12px;margin:4px;background:#bd915a;" title="Downloaded issue is not on your watchlist"></span> one-off</td>
               </tr>
             </table>
+       </div>
+
+       <div id="publisher_dialog" title="Mass publisher selection" style="display:none">
+        <div name="publishers_choice" id="publishers_choice" style="vertical-align: middle; text-align: center">
+          <div>
+               <label><big>Choose.Your.Publishers</big></label></br>
+               <small><center>to select every publisher, do not select anything</small></br></br>
+               <select id="publishers" name="publishers[]" multiple style="width:50%;" placeholder="Select a publisher...">
+               </select>
+               </center>
+               </br>
+               <div class="row checkbox left clearfix">
+                  <input type="checkbox" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="auto_mass_add" id="auto_mass_add" value="1" ${auto_mass_add} /><label>Run automatically when the pull updates?</label>
+               </div>
+          </div>
+          </br>
+          <div id="btn_container_center">
+              <div id="btn_menu" style="padding-bottom:5px;">
+                  <a id="pub_button" onclick="runthem();return false;" href="#">Submit</a>
+              </div>
+          </div>
+          <input id="year" type="hidden" name="year" value="${weekinfo['year']}" />
+          <input id="weeknumber" type="hidden" name="weeknumber" value="${weekinfo['weeknumber']}" />
+        </div>
        </div>
 
 </%def>
@@ -422,7 +390,6 @@
 
         function run_them() {
             var pubs = document.getElementsByName("publishers[]");
-            // because there are circular references, we need to clean it first...
             var publishers = CircularJSON.stringify(pubs);
             if ($("#auto_mass_add").is(":checked")){
                 mass_auto = true;
@@ -467,7 +434,6 @@
                 $("#menu_link_delete").click(openMassAdd);
                 $("#pub_button").click(run_them);
 
-                // The linkfeedback class click handler
                 $('body').on('click', 'a[href="#"]', function() {
                     var savet = this;
                     $(this).css('position', 'relative').css('top', '3px');
@@ -497,7 +463,6 @@
                                     name : this.name
                                 });
                             })
-                            //options = [{"name":"publisher name here"}];
                             try {
                                 items = options.map(x => x.name);
                             } catch(e) {
@@ -540,7 +505,7 @@
                                          success: function (res) {
                                              var rspns = eval(res)
                                              callback(rspns);
-                                        }
+                                         }
                                      });
                                  },
                             });
@@ -549,9 +514,6 @@
                 $('#pull_table').dataTable (
                         {
                                 "bDestroy": true,
-                                //"aoColumnDefs": [
-                                //       { 'bSortable': false, 'aTargets': [ 2,3 ] }
-                                //],
                                 "aLengthMenu": [[10, 15, 25, 50, -1], [10, 15, 25, 50, 'All' ]],
                                 "oLanguage": {
                                        "sLengthMenu":"Show _MENU_ issues per page",
@@ -578,4 +540,3 @@
         });
       </script>
 </%def>
-

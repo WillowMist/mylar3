@@ -9,53 +9,48 @@
         <div id="cv_removed_dialog" title="ComicVine ComicID change detected" style="display:none">
             <span id="crd"></span>
         </div>
-	<div id="subhead_container">
-		<button id="subhead_menu_toggle" style="display: none;" onclick="document.getElementById('subhead_menu').classList.toggle('open');">☰ Menu</button>
-		<div id="subhead_menu">
-                        <a id="menu_link_refresh" title="retrieve any new information for the series" onclick="refresh_series(${comic['ComicID']})" href="#">Refresh Comic</a>
-                        <a id="menu_link_delete" href="#">Delete Comic</a>
-                           <div id="dialog" title="Delete Series Confirmation" style="display:none" class="configtable">
-                              <form action="deleteSeries" method="GET" style="vertical-align: middle; text-align: center">
-                                  </br><input type="submit" value="Delete Series">
-                                  <div class="row checkbox left clearfix">
-                                      </br>
-                                      <input type="checkbox" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="delete_dir" id="deleteCheck" value="1" ${comicConfig['delete_dir']} /><label>Remove directory when deleting Series?</label>
-                                  </div>
-                                  <input type="hidden" name="ComicID" id="ComicID" value=${comic['ComicID']} />
-                              </form>
-                           </div>
-
-                        <input type="hidden" name="meta_enabled" id="meta_enabled" value=${mylar.CONFIG.ENABLE_META} />
-                        <input type="hidden" name="meta_cbr2cbz" id="meta_cbr2cbz" value=${mylar.CONFIG.CBR2CBZ_ONLY} />
-                        <input type="hidden" name="rename_enabled" id="rename_enabled" value=${mylar.CONFIG.RENAME_FILES} />
-                        %if mylar.CONFIG.RENAME_FILES:
-                            <a id="menu_link_refresh" tile="rename all files in a Downloaded status as per the folder format string" onclick="manual_rename(${comic['ComicID']})" href="#">Rename Files</a>
-                        %endif
-
-                            <a id="menu_link_refresh" title="Rescan local files" onclick="force_rescan(${comic['ComicID']})">Recheck Files</a>
-                        <a id="menu_link_searchmissing" title="Search for all Missing files" onclick="search4missing(${comic['ComicID']})" href="#">Search-4-Missing</a>
-                        %if any([mylar.CONFIG.ENABLE_META, mylar.CONFIG.CBR2CBZ_ONLY]):
-                            <a id="menu_link_refresh" href="#" title="perform metatagging on each Downloaded issue" onclick="group_metatag(${comic['ComicID']})">Manual MetaTagging</a>
-                        %endif
-
-                        %if comic['Status'] == 'Paused':
-                                <a id="menu_link_resume" href="#" onclick="doAjaxCall('resumeSeries?ComicID=${comic['ComicID']}',$(this),true);reload_tabs();" data-success="${comic['ComicName']} resumed">Resume Comic</a>
-                        %else:
-                                <a id="menu_link_pauze" href="#" onclick="doAjaxCall('pauseSeries?ComicID=${comic['ComicID']}',$(this),true);reload_tabs();" data-success="${comic['ComicName']} paused">Pause Comic</a>
-                        %endif
-
-                        %if annuals:
-                                <a id="menu_link_delete" href="annualDelete?comicid=${comic['ComicID']}">Delete Annuals</a>
-                        %endif
-<!--
-                        <a id="menu_link_addalltoRL" href="#" class="menu_link_addalltoRL">Add All to Readinglist</a>
--->
-		</div>
-	</div>
 </%def>
 <%def name="body()">
         <input type="hidden" id="page_name" value="series_detail" />
         <input type="hidden" id="cv_removed" value="${comic['cv_removed']}" />
+        <div style="margin-top:60px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+                        <a id="menu_link_refresh" title="retrieve any new information for the series" onclick="refresh_series(${comic['ComicID']})" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Refresh Comic</a>
+                        <a id="menu_link_delete" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Delete Comic</a>
+                        %if mylar.CONFIG.RENAME_FILES:
+                            <a id="menu_link_refresh" tile="rename all files in a Downloaded status as per the folder format string" onclick="manual_rename(${comic['ComicID']})" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Rename Files</a>
+                        %endif
+                        <a id="menu_link_refresh" title="Rescan local files" onclick="force_rescan(${comic['ComicID']})" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Recheck Files</a>
+                        <a id="menu_link_searchmissing" title="Search for all Missing files" onclick="search4missing(${comic['ComicID']})" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Search-4-Missing</a>
+                        %if any([mylar.CONFIG.ENABLE_META, mylar.CONFIG.CBR2CBZ_ONLY]):
+                            <a id="menu_link_refresh" href="#" title="perform metatagging on each Downloaded issue" onclick="group_metatag(${comic['ComicID']})" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Manual MetaTagging</a>
+                        %endif
+                        %if comic['Status'] == 'Paused':
+                                <a id="menu_link_resume" href="#" onclick="doAjaxCall('resumeSeries?ComicID=${comic['ComicID']}',$(this),true);reload_tabs();" data-success="${comic['ComicName']} resumed" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Resume Comic</a>
+                        %else:
+                                <a id="menu_link_pauze" href="#" onclick="doAjaxCall('pauseSeries?ComicID=${comic['ComicID']}',$(this),true);reload_tabs();" data-success="${comic['ComicName']} paused" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Pause Comic</a>
+                        %endif
+                        %if annuals:
+                                <a id="menu_link_delete" href="annualDelete?comicid=${comic['ComicID']}" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Delete Annuals</a>
+                        %endif
+		</div>
+        </div>
+
+        <input type="hidden" name="meta_enabled" id="meta_enabled" value=${mylar.CONFIG.ENABLE_META} />
+        <input type="hidden" name="meta_cbr2cbz" id="meta_cbr2cbz" value=${mylar.CONFIG.CBR2CBZ_ONLY} />
+        <input type="hidden" name="rename_enabled" id="rename_enabled" value=${mylar.CONFIG.RENAME_FILES} />
+
+        <div id="dialog" title="Delete Series Confirmation" style="display:none" class="configtable">
+            <form action="deleteSeries" method="GET" style="vertical-align: middle; text-align: center">
+                </br><input type="submit" value="Delete Series">
+                <div class="row checkbox left clearfix">
+                    </br>
+                    <input type="checkbox" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="delete_dir" id="deleteCheck" value="1" ${comicConfig['delete_dir']} /><label>Remove directory when deleting Series?</label>
+                </div>
+                <input type="hidden" name="ComicID" id="ComicID" value=${comic['ComicID']} />
+            </form>
+        </div>
+
 	<div id="paddingheader">
 		<h1>
                    </br>

@@ -7,20 +7,20 @@
 %>
 
 <%def name="headerIncludes()">
-	<div id="subhead_container">
-		<div id="subhead_menu">
-                        %if mylar.CONFIG.TAB_ENABLE:
-   			    <a id="menu_link_delete" href="#" onclick="doAjaxCall('syncfiles',$(this),'table')" data-success="Syncing complete.">Sync</a>
-                        %endif
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('removefromreadlist?AllRead=1',$(this),'table')" data-success="All Read Records Removed">Remove Read</a>
-			<a id="menu_link_delete" href="#">Force New Check</a>
-                        <a id="menu_link_refresh" href="#">Clear File Cache</a>
-		</div>
-	</div>
 </%def>
 
 <%def name="body()">
         <input type="hidden" id="page_name" value="reading_list" />
+        <div style="margin-top:60px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+                        %if mylar.CONFIG.TAB_ENABLE:
+      			    <a id="menu_link_delete" href="#" onclick="doAjaxCall('syncfiles',$(this),'table')" data-success="Syncing complete." style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Sync</a>
+                        %endif
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('removefromreadlist?AllRead=1',$(this),'table')" data-success="All Read Records Removed" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Remove Read</a>
+			<a id="menu_link_delete" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Force New Check</a>
+                        <a id="menu_link_refresh" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear File Cache</a>
+		</div>
+        </div>
 	<div id="paddingheader">
 		<h1 class="clearfix"><img src="images/ReadingList-icon.png" height="26" width="26" alt="Reading List"/>Reading List Management</h1>
 	</div>

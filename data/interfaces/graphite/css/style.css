@@ -624,11 +624,31 @@ footer {
    }
 }
 
+/* Jobs tab tables */
+#tabs-4 table[summary="Activity / Jobs"] {
+  min-width: 800px !important;
+  width: 800px !important;
+}
+
+#tabs-4 table[summary="Queue Status"] {
+  min-width: 300px !important;
+  width: 300px !important;
+  margin: 0 auto !important;
+  display: table !important;
+}
+
 /* Override #main width on mobile for graphite */
 @media (max-width: 991px) {
   #main {
     width: 100% !important;
-    padding: 10px !important;
+    padding: 80px 10px 10px 10px !important;
+  }
+  
+  /* Make Queue table wider on mobile */
+  #tabs-4 table[summary="Queue Status"] {
+    min-width: 600px !important;
+    width: 600px !important;
+    margin: 0 auto !important;
   }
   
   /* Series details page mobile optimization */
@@ -702,18 +722,22 @@ footer {
   
   /* Override original menu positioning on mobile */
   #subhead_menu {
-    display: none !important;
+    display: block !important;
     flex-direction: column !important;
     float: none !important;
     position: static !important;
     width: 100% !important;
     margin-top: 0 !important;
     z-index: auto !important;
+    background: #2c3e50 !important;
   }
   
-  /* Show menu when open class is added */
-  #subhead_menu.open {
-    display: flex !important;
+  #subhead_menu a {
+    display: block !important;
+    padding: 10px 15px !important;
+    margin-bottom: 2px !important;
+    background: #34495e !important;
+    color: #ecf0f1 !important;
   }
   
   #subhead_menu a {
@@ -3227,50 +3251,6 @@ img.mylarload.lastbad {
     width: 100% !important;
     text-align: left !important;
     padding: 10px 0 !important;
-  }
-  
-  /* Manage page - Activity/Jobs table in tabs-4 */
-  #tabs-4 table[summary="Activity / Jobs"],
-  #tabs-4 table[summary="Queue Status"] {
-    width: 100% !important;
-    display: block !important;
-    overflow-x: auto !important;
-  }
-  
-  #tabs-4 table[summary="Activity / Jobs"] thead,
-  #tabs-4 table[summary="Queue Status"] thead {
-    display: block !important;
-  }
-  
-  #tabs-4 table[summary="Activity / Jobs"] tbody,
-  #tabs-4 table[summary="Queue Status"] tbody {
-    display: block !important;
-  }
-  
-  #tabs-4 table[summary="Activity / Jobs"] tr,
-  #tabs-4 table[summary="Queue Status"] tr {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    margin-bottom: 10px !important;
-  }
-  
-  #tabs-4 table[summary="Activity / Jobs"] th,
-  #tabs-4 table[summary="Queue Status"] th {
-    display: block !important;
-    width: 100% !important;
-    background-color: #3498db !important;
-    color: #ecf0f1 !important;
-    font-weight: bold !important;
-    padding: 8px !important;
-  }
-  
-  #tabs-4 table[summary="Activity / Jobs"] td,
-  #tabs-4 table[summary="Queue Status"] td {
-    display: inline-block !important;
-    width: auto !important;
-    min-width: 50% !important;
-    padding: 5px 10px !important;
-    border-right: 1px solid #ddd !important;
   }
   
   /* Hide float:right time display on mobile */
