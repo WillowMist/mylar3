@@ -10,6 +10,7 @@
             <span id="crd"></span>
         </div>
 	<div id="subhead_container">
+		<button id="subhead_menu_toggle" style="display: none;" onclick="document.getElementById('subhead_menu').classList.toggle('open');">☰ Menu</button>
 		<div id="subhead_menu">
                         <a id="menu_link_refresh" title="retrieve any new information for the series" onclick="refresh_series(${comic['ComicID']})" href="#">Refresh Comic</a>
                         <a id="menu_link_delete" href="#">Delete Comic</a>
@@ -1641,10 +1642,87 @@
                 $( "#tabs" ).tabs({
                     cache: false,
                 });
-                $("#menu_link_delete").click(openDelete);
-                initActions();
-                $.fn.DataTable.ext.pager.numbers_length = 3;
-                $('#issue_table').dataTable( {
+                 $("#menu_link_delete").click(openDelete);
+                 initActions();
+                 $.fn.DataTable.ext.pager.numbers_length = 3;
+                 
+                 // Function to format child row with options buttons and date
+                 function formatIssueChildRow(data) {
+                     // data array: [0]=issue#, [1]=name, [2]=date, [3]=status, [4]=issueid, [5]=filename, [6-11]=other, [12]=legacy
+                     
+                     // Get display date
+                     var displaydate = document.getElementById("display_the_date").innerHTML;
+                     var issdate = '';
+                     var vv = '';
+                     if (displaydate == 'Show Cover Date'){
+                         issdate = data[10]; // store date
+                         vv = 'store';
+                     } else {
+                         issdate = data[2]; // cover date
+                         vv = 'cover';
+                     }
+                     
+                     // Build date label
+                     var dateline = 'Publication Date';
+                     if (data[9] != '0000-00-00' && data[9] !== null ){
+                         dateline += ' (Digital: '+data[9]+')';
+                         issdate += '**';
+                     }
+                     
+                     // Generate options buttons based on status
+                     var issueimg = '<img src="images/issueinfo_grey.png" height="25" width="25" title="Retrieve Issue Details" class="highqual" style="margin:2px 1px 3px 3px;" />';
+                     var displayline = '<a id="manqueueit" name="manqueueit" title="Search for issue" href="#"><img src="images/search.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                     
+                     if (data[3] == 'Skipped' || data[3] == 'Ignored'){
+                         displayline += '<a id="queueit" name="queueit" title="Mark issue as Wanted" href="#"><img src="images/wanted_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                     } else if (data[3] == 'Wanted'){
+                         displayline += '<a id="unqueueit" name="unqueueit" title="Mark issue as Skipped" href="#"><img src="images/skipped_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                     } else if (data[3] == 'Snatched'){
+                         displayline += '<a id="queueit" name="queueit" title="Mark issue as Wanted" href="#"><img src="images/wanted_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         displayline += '<a id="retryit" name="retryit" title="Retry the same download again" href="#"><img src="images/retry_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         displayline += '<a id="unqueueit" name="queueit" title="Mark issue as Skipped" href="#"><img src="images/skipped_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         displayline += '<a id="failit" name="failit" title="Mark issue as Failed" href="#"><img src="images/failed.png" class="highqual" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                     } else if (data[3] == 'Archived'){
+                         displayline += '<a id="queueit" name="queueit" title="Mark issue as Wanted" href="#"><img src="images/wanted_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         displayline += '<a id="unqueueit" name="queueit" title="Mark issue as Skipped" href="#"><img src="images/skipped_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                     } else if (data[3] == 'Downloaded'){
+                         displayline += '<a id="unqueueit" name="queueit" title="Mark issue as Skipped" href="#"><img src="images/skipped_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         displayline += '<a id="failit" name="failit" title="Mark issue as Failed" href="#"><img src="images/failed.png" class="highqual" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         if (data[5]){
+                             if (data[5].toLowerCase().indexOf('.cbz') >=0){
+                                 issueimg = '<img src="images/issueinfo_blue.png" height="25" width="25" title="View CBZ Issue Details" class="highqual" style="margin:2px 1px 3px 3px;" />';
+                             } else if (data[5].toLowerCase().indexOf('.cbr') >=0){
+                                 issueimg = '<img src="images/issueinfo_orange.png" height="25" width="25" title="View CBR Issue Details" class="highqual" style="margin:2px 1px 3px 3px;" />';
+                             }
+                         }
+                         if (document.getElementById("meta_enabled").value == 'True' || document.getElementById("meta_cbr2cbz").value == 'True'){
+                             displayline += '<a id="metatag" name="metatag" title="Manually meta-tag issue" href="#"><img src="images/comictagger.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         }
+                     }
+                     displayline += '<a id="listbox" name="listbox" href="#issue-box" class="issue-window">'+issueimg+'</a>';
+                     if (data[3] == 'Downloaded'){
+                         displayline += '<a id="readlistadd" name="readlistadd" title="Add to Reading List" href="#"><img src="images/glasses-icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                         displayline += '<a href="downloadthis?issueid='+String(data[4])+'" title="Download this issue"><img src="images/download_icon.png" height="25" width="25" style="margin:2px 1px 3px 3px;" /></a>';
+                     }
+                     
+                     // Add file info for downloaded/archived items
+                     var fileInfo = '';
+                     if ((data[3] == 'Downloaded' || data[3] == 'Archived') && data[5] !== null){
+                         fileInfo = '<div style="margin-bottom: 1rem; padding: 0.75rem; background-color: rgba(0,0,0,0.3); border-radius: 4px; font-size: 11px; word-break: break-all;">' +
+                             '<strong>File:</strong> ' + data[5] + ' (' + data[6] + ')' +
+                             '</div>';
+                     }
+                     
+                     return '<div style="padding: 1rem; background-color: #34495e; border-radius: 4px;">' +
+                         '<div style="margin-bottom: 1rem; font-size: 12px;"><strong>' + dateline + ':</strong> ' + issdate + '</div>' +
+                         fileInfo +
+                         '<div style="text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">' +
+                         displayline +
+                         '</div>' +
+                         '</div>';
+                 }
+                 
+                 $('#issue_table').dataTable( {
                     "stateSave" : true,
                     "stateDuration" : 0,
                     // We don't want to remember the page we're at across refreshes as it will confuse different size
@@ -1865,10 +1943,38 @@
                          //[12] = alt_issuenumber;
                          return nRow;
                      },
-                     "drawCallback": function (settings) {
-                         // Jump to top of page
-                         $('#issue_table div.dataTables_scrollBody').scrollTop(pageScrollPos);
-                     },
+                      "drawCallback": function (settings) {
+                          // Jump to top of page
+                          $('#issue_table div.dataTables_scrollBody').scrollTop(pageScrollPos);
+                          
+                          // Add expandable row handlers on mobile
+                          if ($(window).width() <= 991) {
+                              // Use event delegation on tbody so handlers persist through DataTables redraws
+                              $('#issue_table tbody').off('click.expand').on('click.expand', 'tr:not(.child)', function(e) {
+                                  // Don't expand if clicking on checkbox
+                                  if (e.target.type === 'checkbox') {
+                                      return;
+                                  }
+                                  
+                                  var tr = $(this);
+                                  var nextRow = tr.next('tr.child');
+                                  
+                                  // Check if child row already exists
+                                  if (nextRow.length > 0) {
+                                      // Remove the child row
+                                      nextRow.remove();
+                                      tr.removeClass('shown');
+                                  } else {
+                                      // Create and insert child row with options
+                                      var rowData = $('#issue_table').DataTable().row(tr).data();
+                                      var childHtml = formatIssueChildRow(rowData);
+                                      var childRow = $('<tr class="child"><td colspan="6">' + childHtml + '</td></tr>');
+                                      tr.after(childRow);
+                                      tr.addClass('shown');
+                                  }
+                              });
+                          }
+                      },
                      "serverData": function ( sSource, aoData, fnCallback ) {
                                 /* Add some extra data to the sender */
                                 aoData.push({"name": "Paging_ComicID", "value": retrieve_comicid() });

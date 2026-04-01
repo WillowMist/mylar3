@@ -33,15 +33,15 @@
 	table.display_no_select,
 	table.display_notifs,
 	table.display_log {
-		width: fit-content !important;
+		width: 100% !important;
 		font-size: 11px !important;
 		margin: 0 !important;
 	}
 	
 	/* Specific override for series_table */
 	table#series_table {
-		width: fit-content !important;
-		max-width: none !important;
+		width: 100% !important;
+		max-width: 100% !important;
 	}
 	
 	/* Override DataTables inline column widths */
@@ -89,65 +89,74 @@
 		width: auto !important;
 	}
 	
-	/* Hide less important columns on mobile for main display table */
+	/* Hide less important columns on mobile for series table */
 	/* Show only: Comic (2), Last Issue (4), Have (6) */
 	/* Hide: Publisher (1), Year (3), Published (5), Status (7), Active (8) */
-	table.display th#publisher,
-	table.display td:nth-child(1) {
+	table#series_table th#publisher,
+	table#series_table td:nth-child(1) {
 		display: none !important;
 	}
 	
-	table.display th#year,
-	table.display td:nth-child(3) {
+	table#series_table th#year,
+	table#series_table td:nth-child(3) {
 		display: none !important;
 	}
 	
-	table.display th#published,
-	table.display td:nth-child(5) {
+	table#series_table th#published,
+	table#series_table td:nth-child(5) {
 		display: none !important;
 	}
 	
-	table.display th#status,
-	table.display td:nth-child(7) {
+	table#series_table th#status,
+	table#series_table td:nth-child(7) {
 		display: none !important;
 	}
 	
-	table.display th#active,
-	table.display td:nth-child(8) {
+	table#series_table th#active,
+	table#series_table td:nth-child(8) {
 		display: none !important;
 	}
 	
 	/* Visible columns sizing on mobile: Comic (2), Last Issue (4), Have (6) */
-	table.display th#name,
-	table.display td:nth-child(2) {
-		width: 200px !important;
-		min-width: 200px !important;
+	table#series_table th#name,
+	table#series_table td:nth-child(2) {
+		width: 1fr !important;
+		min-width: 100px !important;
 		padding: 4px 4px !important;
+		flex-grow: 1 !important;
 	}
 	
-	table.display th#issue,
-	table.display td:nth-child(4) {
-		width: 50px !important;
-		min-width: 50px !important;
+	table#series_table th#issue,
+	table#series_table td:nth-child(4) {
+		width: 40px !important;
+		min-width: 40px !important;
 		padding: 2px 2px !important;
 		font-size: 9px !important;
 		white-space: nowrap !important;
 	}
 	
-	table.display th#have,
-	table.display td:nth-child(6) {
-		width: 60px !important;
-		min-width: 60px !important;
+	table#series_table th#have,
+	table#series_table td:nth-child(6) {
+		width: 45px !important;
+		min-width: 45px !important;
 		padding: 4px 4px !important;
 	}
 	
+	/* Hide checkbox on mobile to save space */
+	table#series_table th#select,
+	table#series_table td:nth-child(1) {
+		display: none !important;
+	}
+	
 	/* Add expandable row styling */
-	table.display tr.child {
+	table.display tr.child,
+	table#series_table tr.child {
 		background-color: #34495e !important;
 		display: table-row !important;
 	}
 	
-	table.display tr.child td {
+	table.display tr.child td,
+	table#series_table tr.child td {
 		padding: 1rem !important;
 		border: none !important;
 		display: table-cell !important;
@@ -174,25 +183,7 @@
 		margin-bottom: 2px !important;
 	}
 	
-	table.display th#year,
-	table.display td:nth-child(3) {
-		visibility: hidden !important;
-		display: none !important;
-		width: 0 !important;
-		padding: 0 !important;
-		margin: 0 !important;
-		border: none !important;
-	}
-	
-	table.display th#published,
-	table.display td:nth-child(5) {
-		visibility: hidden !important;
-		display: none !important;
-		width: 0 !important;
-		padding: 0 !important;
-		margin: 0 !important;
-		border: none !important;
-	}
+
 	
 	/* Improve DataTables controls on mobile */
 	.dataTables_length,
@@ -256,6 +247,117 @@
 		margin-bottom: 4px !important;
 		width: 100% !important;
 	}
+	
+	/* Ensure issue and annual tables show all columns */
+	#issue_table th,
+	#issue_table td,
+	#annual_table th,
+	#annual_table td {
+		display: table-cell !important;
+	}
+	
+	/* Hide options and date columns on mobile - will be shown in child row */
+	#issue_table th#reldate,
+	#issue_table td:nth-child(4) {
+		display: none !important;
+	}
+	
+	#issue_table th#options,
+	#issue_table td:nth-child(6) {
+		display: none !important;
+	}
+	
+	#annual_table th#areldate,
+	#annual_table td:nth-child(5) {
+		display: none !important;
+	}
+	
+	#annual_table th#aoptions,
+	#annual_table td:nth-child(7) {
+		display: none !important;
+	}
+	
+	/* Mobile column widths for issue table */
+	#issue_table th#select,
+	#issue_table td:nth-child(1) {
+		width: 30px !important;
+		max-width: 30px !important;
+		padding: 4px 2px !important;
+	}
+	
+	#issue_table th#issuenumber,
+	#issue_table td:nth-child(2) {
+		width: 45px !important;
+		max-width: 45px !important;
+		padding: 4px 2px !important;
+		font-size: 11px !important;
+	}
+	
+	#issue_table th#issuename,
+	#issue_table td:nth-child(3) {
+		width: 120px !important;
+		max-width: 120px !important;
+		padding: 4px 2px !important;
+		font-size: 11px !important;
+		white-space: normal !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+	}
+	
+	#issue_table th#status,
+	#issue_table td:nth-child(5) {
+		width: 60px !important;
+		max-width: 60px !important;
+		padding: 4px 2px !important;
+		font-size: 10px !important;
+	}
+	
+
+	
+	/* Mobile column widths for annual table */
+	#annual_table th#aselect,
+	#annual_table td:nth-child(1) {
+		width: 30px !important;
+		max-width: 30px !important;
+		padding: 4px 2px !important;
+	}
+	
+	#annual_table th#agroup_name,
+	#annual_table td:nth-child(2) {
+		width: 50px !important;
+		max-width: 50px !important;
+		padding: 4px 2px !important;
+		font-size: 10px !important;
+	}
+	
+	#annual_table th#aissuenumber,
+	#annual_table td:nth-child(3) {
+		width: 45px !important;
+		max-width: 45px !important;
+		padding: 4px 2px !important;
+		font-size: 11px !important;
+	}
+	
+	#annual_table th#aissuename,
+	#annual_table td:nth-child(4) {
+		width: 100px !important;
+		max-width: 100px !important;
+		padding: 4px 2px !important;
+		font-size: 11px !important;
+		white-space: normal !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+	}
+	
+	#annual_table th#astatus,
+	#annual_table td:nth-child(6) {
+		width: 60px !important;
+		max-width: 60px !important;
+		padding: 4px 2px !important;
+		font-size: 10px !important;
+	}
+	
+
 }
 #wanted_table_wrapper {
 	margin-top: 0;

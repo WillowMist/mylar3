@@ -56,7 +56,7 @@
                       <legend>Version</legend>
                             <center>
                             %if config['br_version_name'] and config['br_release_name']:
-                                <span style="font-weight:bold;">[${config['br_version_name']}]</span><br/>
+                                <span style="font-weight:bold;">[${config['br_version_name']}]</span> 
                                 <span style="font-style:italic;">${config['br_release_name']}</span>
                             %elif config['br_version_name']:
                                 <span style="font-weight:bold;">[${config['br_version_name']}]</span>
@@ -77,7 +77,7 @@
                   </fieldset>
                   <fieldset>
                        <div>
-                            <br/>
+                             
                             <legend>MYLAR PROGRAM OPTIONS</legend>
                             <span id="py_check" class="py_checker"></span>
                             <span id="py_vers"><label><strong>Python Version :</strong> ${config['py_version']}</label></span></br>
@@ -237,12 +237,12 @@
 
                                  <div class="row checkbox">
                                     <input type="checkbox" name="syno_fix" value="1" ${config['syno_fix']} /> <label>Synology Fix</label>
-                                    <br/><small>*Use this if experiencing parsing problems*</small>
+                                     <small>*Use this if experiencing parsing problems*</small>
                                  </div>
 <!--
                                  <div class="row checkbox">
                                     <input type="checkbox" name="auto_update" value="1" ${config['auto_update']} /> <label>Automatic Updates</label>
-                                    <br/><small>Install new updates with no intervention</small>
+                                     <small>Install new updates with no intervention</small>
                                  </div>
 -->
                                  <legend>Interface</legend>
@@ -289,9 +289,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="row checkbox">
-                                        <input id="api_enabled" type="checkbox" name="api_enabled" value="1" ${config['api_enabled']} /><label>Enable API</label>
-                                    </div>
+                                    <span class="checkbox-inline" style="display: flex; align-items: center; margin: 5px 0;">
+                                        <input id="api_enabled" type="checkbox" name="api_enabled" value="1" ${config['api_enabled']} style="margin-right: 5px;" /><label style="margin: 0;">Enable API</label>
+                                    </span>
                                     <div id="apioptions">
                                        <div class="row">
                                           <label>Mylar API key</label>
@@ -304,10 +304,10 @@
                          </fieldset>
                         <fieldset>
                                 <legend>OPDS</legend><span id="opds_url" style="position:relative;top:-35px;right:20px;float:right;display:hidden;margin-bottom:-25px;"></span>
-                                <div class="row">
-                                    <div class="row_checkbox">
-                                        <input id="opds_enable" type="checkbox" name="opds_enable" value="1" ${config['opds_enable']} /><label>Enable OPDS</label>
-                                    </div>
+                                 <div class="row">
+                                     <span class="checkbox-inline" style="display: flex; align-items: center; margin: 5px 0;">
+                                         <input id="opds_enable" type="checkbox" name="opds_enable" value="1" ${config['opds_enable']} style="margin-right: 5px;" /><label style="margin: 0;">Enable OPDS</label>
+                                     </span>
                                     <div id="opdsoptions">
                                         <div class="row_checkbox">
                                             <small></br> - keep in mind your scheme (http or https), and hostname/IP you may have set.
@@ -320,7 +320,7 @@
                                                   <label>OPDS Page Size</label>
                                                   <input type="text" name="opds_pagesize" value="${config['opds_pagesize']}" size="10">
                                              </div>
-					    <input id="opds_authentication" type="checkbox" name="opds_authentication" value="1" ${config['opds_authentication']} /><label>OPDS Requires Credentials</label>
+ 					    <span class="checkbox-inline" style="display: flex; align-items: center; margin: 5px 0;"><input id="opds_authentication" type="checkbox" name="opds_authentication" value="1" ${config['opds_authentication']} style="margin-right: 5px;" /><label style="margin: 0;">OPDS Requires Credentials</label></span>
                                             <%
                                                  opds_notes = "Require authentication for OPDS.  If checked\nyou will need to provide a username/password.\nThe service user name will work (if set).  Additionally,\nyou can provide a user with only OPDS access below.\nNOTE: If this is not checked, OPDS will be available\nwithout a password."
                                             %>
@@ -349,9 +349,9 @@
 	                    <div class="row">
 	                    	<label>Auto-Search Interval</label>
 	                    	<input type="text" name="search_interval" value="${config['search_interval']}" size="4">mins
-                                  <div class="row checkbox">
-                                    <input type="checkbox" name="nzb_startup_search" value="1" ${config['nzb_startup_search']} /><label>Search on startup</label>
-                                  </div>
+                                   <span class="checkbox-inline" style="display: flex; align-items: center; margin: 5px 0;">
+                                    <input type="checkbox" name="nzb_startup_search" value="1" ${config['nzb_startup_search']} style="margin-right: 5px;" /><label style="margin: 0;">Search on startup</label>
+                                   </span>
                                   <div class="row">
                                       <label>Search delay</label>
                                       <input type="text" name="search_delay" value="${config['search_delay']}" size="4" />mins
@@ -367,7 +367,7 @@
                                 <div class="row">
                                         <label>Comic Location Path</label>
                                         <input type="text" name="destination_dir" id="destination_dir" value="${config['destination_dir']}" size="50">
-                                        <small>Where do you store your comics?<br/> (or where do you want me to store them)</small>
+                                        <small>Where do you store your comics?  (or where do you want me to store them)</small>
                                         <small>e.g. /Users/name/Comics or /Volumes/share/comics</small>
                                 </div>
                           </fieldset>
@@ -472,7 +472,7 @@
                                     <div class="row checkbox left clearfix">
                                         <input type="checkbox" id="sab_client_post_processing" name="sab_client_post_processing" onClick="initConfigCheckbox($(this));" value="1" ${config['sab_client_post_processing']} /><label>Enable Completed Download Handling</label>
                                     </div>
-                                    <div class="config">
+                                    <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                         <div class="row checkbox left clearfix" style="display:block;padding-left:1.5em;">
                                             <input type="checkbox" id="sab_remove_completed" name="sab_remove_completed" value="1" ${config['sab_remove_completed']} /><label>Remove completed downloads</label>
                                             <input type="checkbox" id="sab_remove_failed" name="sab_remove_failed" value="1" ${config['sab_remove_failed']} /><label>Remove Failed downloads <small>(includes files)</small></label>
@@ -483,7 +483,7 @@
                                     <div class="row checkbox left clearfix">
                                        <input id="sab_to_mylar" type="checkbox" name="sab_to_mylar" onClick="initConfigCheckbox($(this));" value="1" ${config['sab_to_mylar']} /><label>Are Mylar / SABnzbd on separate machines</label>
                                     </div>
-                                    <div class="config">
+                                    <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                        <div class="row">
                                           <label>SABnzbd Download Directory</label>
                                           <input type="text" name="sab_directory" value="${config['sab_directory']}" size="36">
@@ -493,7 +493,7 @@
                                 </br>
                                 <div align="center" class="row">
                                      <img name="sabnzbd_statusicon" id="sabnzbd_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                     <input type="button" value="Test SABnzbd" id="test_sab" style="float:center" /></br>
+                                     <input type="button" value="Test SABnzbd" id="test_sab" style="margin: 5px 0;" /></br>
                                      <input type="text" name="sabstatus" style="text-align:center;font-size:11px;color:white;" id="sabstatus" size="50" DISABLED />
                                      <div name="sabversion" id="sabversion" style="font-size:11px;" align="center">
                                         <%
@@ -560,7 +560,7 @@
 
                             <div align="center" class="row">
                                  <img name="nzbget_statusicon" id="nzbget_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                 <input type="button" value="Test NZBGet" id="test_nzbget" style="float:center" /></br>
+                                 <input type="button" value="Test NZBGet" id="test_nzbget" style="margin: 5px 0;" /></br>
                                  <input type="text" name="nzbgetstatus" style="text-align:center; font-size:11px;color:white;" id="nzbgetstatus" size="50" DISABLED />
                             </div>
                          
@@ -588,7 +588,7 @@
 				<div class="row checkbox">
 					<input id="enable_torrents" type="checkbox" onclick="initConfigCheckbox($(this));" name="enable_torrents" value=1 ${config['enable_torrents']} /><label>Use Torrents</label>
 				</div>
-				<div class="config">
+				<div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                        <div class="row">
                                            <label>Minimum # of seeders</label>
                                            <input type="text" name="minseeds" value="${config['minseeds']}" size="10">
@@ -609,7 +609,7 @@
 				  <div id="watchdir_local_options">
                                     <div class="row">
 					<label>Watch Directory</label>
-					<input type="text" name="local_watchdir" value="${config['local_watchdir']}" size="30"><br/>
+					<input type="text" name="local_watchdir" value="${config['local_watchdir']}" size="30"> 
 					<small>Local Folder your torrent client watches</small>
                                     </div>
   				  </div>
@@ -635,7 +635,7 @@
                                   </div>
                                   <div class="row">
                                         <label>Watch Directory</label>
-                                        <input type="text" name="seedbox_watchdir" value="${config['seedbox_watchdir']}" size="30"><br/>
+                                        <input type="text" name="seedbox_watchdir" value="${config['seedbox_watchdir']}" size="30"> 
                                         <small>Folder path your torrent seedbox client watches</small>
                                   </div>
 			</fieldset>
@@ -654,7 +654,7 @@
 				</div>
 				<div class="row">
 					<label>uTorrent Label</label>
-					<input type="text" name="utorrent_label" value="${config['utorrent_label']}" size="30"><br/>
+					<input type="text" name="utorrent_label" value="${config['utorrent_label']}" size="30"> 
 					<small>Label for your uTorrent downloads</small>
 				</div>
 			</fieldset>
@@ -664,7 +664,7 @@
                                         <input type="text" id="rtorrent_host" name="rtorrent_host" value="${config['rtorrent_host']}" size="30">
 					<small>ie. https://my.rtorrent, http://192.168.1.1, http://localhost:80, scgi://localhost:5000</small>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                     <div class="row checkbox left clearfix">
                                         <input id="rtorrent_verify" type="checkbox" name="rtorrent_verify" value="1" ${config['rtorrent_verify']} /><label>Verify SSL</label>
                                         <small>(only optionally used for https connections)</small>
@@ -699,12 +699,12 @@
                                 </div>
                                 <div class="row">
                                         <label>rTorrent Directory</label>
-                                        <input type="text" name="rtorrent_directory" value="${config['rtorrent_directory']}" size="30"><br/>
+                                        <input type="text" name="rtorrent_directory" value="${config['rtorrent_directory']}" size="30"> 
                                         <small>Folder path where torrent download will be assigned</small>
                                 </div>
                                 <div class="row">
                                         <label>Label</label>
-                                        <input type="text" name="rtorrent_label" value="${config['rtorrent_label']}" size="30"><br/>
+                                        <input type="text" name="rtorrent_label" value="${config['rtorrent_label']}" size="30"> 
                                         <small>Label to assign for torrents</small>
                                 </div>
                                 <div class="row checkbox left clearfix">
@@ -731,7 +731,7 @@
 				</div>
                 <div class="row">
                         <label>Transmission Directory</label>
-                        <input type="text" name="transmission_directory" value="${config['transmission_directory']}" size="30"><br/>
+                        <input type="text" name="transmission_directory" value="${config['transmission_directory']}" size="30"> 
                         <small>Folder path where torrent download will be assigned</small>
                 </div>
 			</fieldset>
@@ -751,20 +751,20 @@
 				</div>
 				<div class="row">
 					<label>Deluge Label</label>
-					<input type="text" name="deluge_label" value="${config['deluge_label']}" size="30"><br/>
+					<input type="text" name="deluge_label" value="${config['deluge_label']}" size="30"> 
 					<small>Label to be used on the torrents</small>
 				</div>
 				<div class="row">
 					<label>Deluge Download Path</label>
-					<input type="text" name="deluge_download_directory" value="${config['deluge_download_directory']}" size="30"><br/>
+					<input type="text" name="deluge_download_directory" value="${config['deluge_download_directory']}" size="30"> 
 					<small>Where the torrent will be downloaded to</small>
 				</div>
 				<div class="row">
 					<label>Deluge Move Path</label>
-					<input type="text" name="deluge_done_directory" value="${config['deluge_done_directory']}" size="30"><br/>
+					<input type="text" name="deluge_done_directory" value="${config['deluge_done_directory']}" size="30"> 
 					<small>Path that files will be moved to after download is complete</small>
 				</div>
-				<div class="config">
+				<div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
 					<div class="row checkbox left clearfix">
 						<input id="deluge_pause" type="checkbox" name="deluge_pause"  value="1" ${config['deluge_pause']} /><label>Deluge Paused</label>
 						<small>Add the torrent in a paused state</small>
@@ -772,7 +772,7 @@
 				</div>
 				<div class="row">
 					<img name="deluge_status_icon" id="deluge_status_icon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-					<input type="button" value="Test Connection" id="deluge_test" /><br/>
+					<input type="button" value="Test Connection" id="deluge_test" /> 
 				</div>
 			</fieldset>
                                 <fieldset id="qbittorrent_options">
@@ -790,12 +790,12 @@
                                 </div>
                                 <div class="row">
                                         <label>qBittorrent Label</label>
-                                        <input type="text" name="qbittorrent_label" value="${config['qbittorrent_label']}" size="30"><br/>
+                                        <input type="text" name="qbittorrent_label" value="${config['qbittorrent_label']}" size="30"> 
                                         <small>Label to be used on the torrents</small>
                                 </div>
                                 <div class="row">
                                         <label>qBittorrent Folder</label>
-                                        <input type="text" name="qbittorrent_folder" value="${config['qbittorrent_folder']}" size="30"><br/>
+                                        <input type="text" name="qbittorrent_folder" value="${config['qbittorrent_folder']}" size="30"> 
                                         <small>Folder path where torrents will be assigned to</small>
                                 </div>
                                 <div class="row">
@@ -831,7 +831,7 @@
                           <div class="row checkbox left clearfix">
                             <input id="enable_rss" type="checkbox" onclick="initConfigCheckbox($(this));" name="enable_rss" value=1 ${config['enable_rss']} /><label>Enable RSS Feed Searches (nzbs & torrents)</label>
                           </div>
-                          <div class="config">
+                          <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                             <label>RSS Interval Feed Check</label>
                             <input type="text" name="rss_checkinterval" value="${config['rss_checkinterval']}" size="6" /><small>(Mins)</small>
                             <a href="#" style="float:right" type="button" onclick="doAjaxCall('force_rss',$(this))" data-success="RSS Force now running" data-error="Error trying to retrieve RSS Feeds"><span class="ui-icon ui-icon-extlink"></span>Force RSS</a>
@@ -850,7 +850,7 @@
                                 <div class="row checkbox left clearfix">
                                      <input id="enable_airdcpp" type="checkbox" onclick="initConfigCheckbox($(this));" name="enable_airdcpp" value="1" ${config['enable_airdcpp']} /><legend>AirDC++</legend>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                    <div id="airdcpp_options">
                                        <div class="row">
                                           <label>Address:Port</label>
@@ -886,7 +886,7 @@
                                        </div>
                                        <div align="center" class="row">
                                         <img name="airdcpp_statusicon" id="airdcpp_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                        <input type="button" value="Test AirDC++" id="test_airdcpp" style="float:center" /></br>
+                                        <input type="button" value="Test AirDC++" id="test_airdcpp" style="margin: 5px 0;" /></br>
                                         <input type="text" name="airdcppstatus" style="text-align:center;font-size:11px;color:white;" id="airdcppstatus" size="50" DISABLED />
                                         <div name="airdcppversion" id="airdcppversion" style="font-size:11px;" align="center">
                                             <%
@@ -902,7 +902,7 @@
                                 <div class="row checkbox left clearfix">
                                      <input id="enable_ddl" type="checkbox" onclick="initConfigCheckbox($(this));" name="enable_ddl" value="1" ${config['enable_ddl']} /><legend>DDL (Direct Download)</legend>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                    <div id="ddl_providers">
                                         <div class="row checkbox left clearfix">
                                             <input type="checkbox" id="enable_getcomics" onclick="initConfigCheckbox($(this));" name="enable_getcomics" value="1" ${config['enable_getcomics']} /><label>Enable GetComics</label>
@@ -915,7 +915,7 @@
                                        <div class="row checkbox left clearfix">
                                             <input type="checkbox" id="jd2_enable" onclick="initConfigCheckbox($(this));" name="jd2_enable" value="1" ${config['jd2_enable']} /><label>Send to JDownloader2</label>
                                        </div>
-                                       <div class="config">
+                                       <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                            <div id="jd2_options" style="display:none">
                                                <div class="row">
                                                    <label>JDownloader2 URL</label>
@@ -933,7 +933,7 @@
                                        <div class="row checkbox left clearfix">
                                             <input type="checkbox" id="enable_external_server" onclick="initConfigCheckbox($this));" name="enable_external_server" value="1" ${config['enable_external_server']} /><label>Enable External Server</label>
                                        </div>
-                                       <div class="config">
+                                       <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                            <div id="external_options">
                                                <div class="row">
                                                   <label>External Api server</label>
@@ -958,7 +958,7 @@
                                 <div class="row checkbox left clearfix">
                                     <input id="enable_torrent_search" type="checkbox" onclick="initConfigCheckbox($(this));" name="enable_torrent_search" value=1 ${config['enable_torrent_search']} /><legend>Torrents</legned>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
 <!--
                                          <div class="row checkbox left clearfix">
                                                 <input id="enable_public" title="Use Public Torrents" type="checkbox" name="enable_public" value=1 ${config['enable_public']} /><label>Enable Public Torrent Search</label>
@@ -969,7 +969,7 @@
                                          <div class="row checkbox left clearfix">
                                                 <input type="checkbox" id="enable_32p" onclick="initConfigCheckbox($(this));" name="enable_32p" value=1 ${config['enable_32p']} /><label>Enable 32P</label>
                                          </div>
-                                         <div class="config"> 
+                                         <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;"> 
                                              <fieldset>
                                                 <div align="center">
                                                     <input type="radio" name="mode_32p" id="legacymode_32p" value="0" ${config['legacymode_32p']}> Legacy Mode <input type="radio" name="mode_32p" id="authmode_32p" value="1" ${config['authmode_32p']}> Auth Mode
@@ -1002,7 +1002,7 @@
                                                 </div>
                                                 <div align="center" class="row">
                                                     <img name="test32p_statusicon" id="test32p_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                                    <input type="button" value="Test Connection" id="test32p" style="float:center" /></br>
+                                                    <input type="button" value="Test Connection" id="test32p" style="margin: 5px 0;" /></br>
                                                     <input type="text" name="status32p" style="text-align:center; font-size:11px;" id="status32p" size="50" DISABLED />
                                                 </div>
                                                 <div name="inkdrops32p" id="inkdrops32p" style="font-size:11px;" align="center">
@@ -1159,10 +1159,10 @@
                 <td>
                         <fieldset>
                                 <legend>File-Type Search Restrictions</legend>
-                                <div class="row radio left clearfix">
-                                     <input type="radio" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="preferred_quality" value="1" ${config['pref_qual_1']} /><label>cbr</label>
-                                     <input type="radio" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="preferred_quality" value="2" ${config['pref_qual_2']} /><label>cbz</label>
-                                     <input type="radio" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="preferred_quality" value="0" ${config['pref_qual_0']} /><label>Whichever - just get it</label>
+                                <div class="row radio left clearfix" style="display: flex; flex-wrap: wrap; align-items: center;">
+                                     <span style="display: inline-flex; align-items: center; margin-right: 10px;"><input type="radio" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="preferred_quality" value="1" ${config['pref_qual_1']} /><label>cbr</label></span>
+                                     <span style="display: inline-flex; align-items: center; margin-right: 10px;"><input type="radio" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="preferred_quality" value="2" ${config['pref_qual_2']} /><label>cbz</label></span>
+                                     <span style="display: inline-flex; align-items: center; margin-right: 10px;"><input type="radio" style="vertical-align: middle; margin: 3px; margin-top: -1px;" name="preferred_quality" value="0" ${config['pref_qual_0']} /><label>Whichever - just get it</label></span>
                                 </div>
                         </fieldset>
                          <fieldset>
@@ -1179,7 +1179,7 @@
                                 <div class="row checkbox left">
                                       <input id="use_minsize" type="checkbox" style="vertical-align: middle; margin: 3px; margin-top: -1px;" onclick="initConfigCheckbox($(this));" name="use_minsize" value="1" ${config['use_minsize']} /><label>Minimum File size<small>(MB)</small></label>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                        <div class="row">
                                            <input type="text" name="minsize" value="${config['minsize']}" size="6">
                                        </div>
@@ -1189,7 +1189,7 @@
                                    <div class="row checkbox left">
                                        <input id="use_maxsize" type="checkbox" style="vertical-align: middle; margin: 3px; margin-top: -1px;" onclick="initConfigCheckbox($(this));" name="use_maxsize" value="1" ${config['use_maxsize']} /><label>Maximum File size<small>(MB)</small></label>
                                    </div>
-                                   <div class="config">
+                                   <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                       <div class="row">
                                          <input type="text" name="maxsize" value="${config['maxsize']}" size="6">
                                       </div>
@@ -1218,7 +1218,7 @@
                              <div class="row checkbox left clearfix">
                                  <input type="checkbox" id="ddump" onclick="initConfigCheckbox($(this));" name="ddump" value="1" ${config['ddump']} /><label>Enable Duplicate Dump Folder</label>
                              </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                     <div class="row"">
                                        <label>Full path to move files determined to be duplicates</label>
                                        <input type="text" name="duplicate_dump" value="${config['duplicate_dump']}" size="30">
@@ -1230,7 +1230,7 @@
                              <div class="row checkbox left clearfix">
                                  <input type="checkbox" id="enable_failed" onclick="initConfigCheckbox($(this));" name="failed_download_handling" value="1" ${config['failed_download_handling']} /><label>Enable Failed Download Handling</label>
                              </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                     <div class="row checkbox left clearfix">
                                        <input type="checkbox" name="failed_auto" value="1" ${config['failed_auto']} /><label>Enable Automatic-Retry for Failed Downloads</label>
                                     </div>
@@ -1244,7 +1244,7 @@
                                 <div class="row checkbox left clearfix">
                                      <input type="checkbox" id="post_processing" onclick="initConfigCheckbox($(this));" name="post_processing" value="1" ${config['post_processing']} /><label>Enable Post-Processing<small> (not checked = NO post-processing/post-management)</small></label>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                     <div class="row left">
                                         <label>When Post-Processing
                                         <select name="file_opts" onchange="changeTest()" id="file_opts">
@@ -1265,55 +1265,55 @@
                                          %endfor
                                         </select> the files</label>
                                     </div>
-                                    <br/>
+                                     
                                     <div class="row checkbox left clearfix">
                                         <input type="checkbox" id="enable_check_folder" onclick="initConfigCheckbox($(this));" name="enable_check_folder" value="1" ${config['enable_check_folder']} /><label>Enable Folder Monitoring<small></label>
                                     </div>
-                                    <div class="config">
-                                       <div class="row">
+                                    <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
+                                       <div class="row" style="margin-left: 0; padding-left: 0;">
                                           <label>Folder location to monitor</label>
                                           <input type="text" name="check_folder" value="${config['check_folder']}" size="30">
                                           <small>enter in the absolute path to monitor for new issues</small>
                                           <div id="check_folder_warning" style="display:none;color:red;">Do not monitor your comic or download paths</div>
                                        </div>
-                                       <div class="row">
+                                       <div class="row" style="margin-left: 0; padding-left: 0;">
                                           <label>Folder Monitor Scan Interval</label>
                                           <input type="text" name="download_scan_interval" value="${config['download_scan_interval']}" size="4">mins
                                           <small>enter in the time delay scanning the folder</small>
                                        </div>
 
-                                    </div>
+                                   </div>
                                 </div>
                                 <div class="row checkbox left clearfix">
                                     <input type="checkbox" id="enable_pre_scripts" onclick="initConfigCheckbox($(this));" name="enable_pre_scripts" value="1" ${config['enable_pre_scripts']} /><label>Run script BEFORE Post-Processing</label>
                                 </div>
-                                <div class="config">
-                                   <div class="row">
-                                      <label>Pre - Script Location</label>
-                                      <input type="text" name="pre_scripts" value="${config['pre_scripts']}" size="30">
-                                      <small>enter in the absolute path to the script</small>
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
+                                   <div class="row" style="margin-left: 0; padding-left: 0;">
+                                     <label>Pre - Script Location</label>
+                                     <input type="text" name="pre_scripts" value="${config['pre_scripts']}" size="30">
+                                     <small>enter in the absolute path to the script</small>
                                    </div>
-                                </div>
-                                <div class="row checkbox left clearfix">
-                                    <input type="checkbox" id="enable_snatch_script" onclick="initConfigCheckbox($(this));" name="enable_snatch_script" value="1" ${config['enable_snatch_script']} /><label>Run script AFTER an item has been snatched and sent to client</label>
-                                </div>
-                                <div class="config">
-                                    <div class="row">
-                                        <label>On Snatch Script Location</label>
-                                        <input type="text" name="snatch_script" value="${config['snatch_script']}" size="30">
-                                        <small>enter in the absolute path to the script</small>
-                                    </div>
-                                </div>
-                                <div class="row checkbox left clearfix">
-                                    <input type="checkbox" id="enable_extra_scripts" onclick="initConfigCheckbox($(this));" name="enable_extra_scripts" value="1" ${config['enable_extra_scripts']} /><label>Run script AFTER Post-Processing</label>
-                                </div>
-                                <div class="config">
-                                    <div class="row">
-                                        <label>Extra Script Location</label>
-                                        <input type="text" name="extra_scripts" value="${config['extra_scripts']}" size="30">
-                                        <small>enter in the absolute path to the script</small>
-                                    </div>
-                                </div>                           
+                               </div>
+                               <div class="row checkbox left clearfix">
+                                   <input type="checkbox" id="enable_snatch_script" onclick="initConfigCheckbox($(this));" name="enable_snatch_script" value="1" ${config['enable_snatch_script']} /><label>Run script AFTER an item has been snatched and sent to client</label>
+                               </div>
+                               <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
+                                   <div class="row" style="margin-left: 0; padding-left: 0;">
+                                       <label>On Snatch Script Location</label>
+                                       <input type="text" name="snatch_script" value="${config['snatch_script']}" size="30">
+                                       <small>enter in the absolute path to the script</small>
+                                   </div>
+                               </div>
+                               <div class="row checkbox left clearfix">
+                                   <input type="checkbox" id="enable_extra_scripts" onclick="initConfigCheckbox($(this));" name="enable_extra_scripts" value="1" ${config['enable_extra_scripts']} /><label>Run script AFTER Post-Processing</label>
+                               </div>
+                               <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
+                                   <div class="row" style="margin-left: 0; padding-left: 0;">
+                                       <label>Extra Script Location</label>
+                                       <input type="text" name="extra_scripts" value="${config['extra_scripts']}" size="30">
+                                       <small>enter in the absolute path to the script</small>
+                                   </div>
+                               </div>
                 	</fieldset>
                         <fieldset>
                                 <legend>Conversions</legend>
@@ -1321,7 +1321,7 @@
                                 <div class="row checkbox left clearfix">
                                     <input type="checkbox" id="enable_file_conversions" onclick="initConfigCheckbox($(this));" name="enable_file_conversions" value="1"  /><label>File Conversions</label>
                                 </div>
-                                    <div class="config">
+                                    <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
 -->
                                         <small class="heading" id="cbr2cbz_section" style="display:none;"><span style="float: left; margin-right: .3em; margin-top: 4px;" class="ui-icon ui-icon-info"></span><span id="cbr2cbz_blurb"></span></small>
                                         <div class="row checkbox left clearfix">
@@ -1337,7 +1337,7 @@
                                 <div class="row checkbox left clearfix">
                                     <input type="checkbox" id="enable_image_conversions" onclick="initConfigCheckbox($(this));" name="enable_image_conversions" value="1" /><label>Image Conversions</label>
                                 </div>
-                                    <div class="config">
+                                    <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                         <div class="row checkbox left clearfix">
                                                 <input style="float:left;width:40px;" id="jpg2wepb" type="checkbox" name="jpg2wepb_only" value="0" /><label style="float:left;width:75%;">Convert (JPG/PNG) to WEBP</label>
                                         </div>
@@ -1352,7 +1352,7 @@
                                 <div class="row checkbox left clearfix">
                                      <input id="enable_meta" type="checkbox" onclick="initConfigCheckbox($(this));" name="enable_meta" value="1" ${config['enable_meta']} /><label>Enable Metadata Tagging</label>
                                 </div>
-                                <div class="config">
+                                <div class="config" style="margin-left: 8px; padding-left: 8px; border-left: 2px solid #3498db;">
                                         <div id="metataggingoptions">
                                             <div class="row checkbox left clearfix">
                                                     <input type="checkbox" name="ct_tag_cr" value="1" ${config['ct_tag_cr']} /><label>Write ComicRack (cr) tags (ComicInfo.xml)</label>
@@ -1485,7 +1485,7 @@
                                                 </div>
 
                                 <div class="row checkboxclearfix">
-                                   <input type="checkbox" name="lowercase_filenames" value="1" ${config['lowercase_filenames']} /><label>Lowercase the entire filename</label><br/>
+                                   <input type="checkbox" name="lowercase_filenames" value="1" ${config['lowercase_filenames']} /><label>Lowercase the entire filename</label> 
                                    <small>(will work regardless if Rename Files is enabled)</small>
                                 </div>
 
@@ -1572,7 +1572,7 @@
                              </div>
                             <div align="center" class="row">
                                  <img name="pushover_statusicon" id="pushover_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                 <input type="button" value="Test Pushover" id="pushover_test" style="float:center" /></br>
+                                 <input type="button" value="Test Pushover" id="pushover_test" style="margin: 5px 0;" /></br>
                                  <input type="text" name="pushoverstatus" style="text-align:center; font-size:11px;" id="pushoverstatus" size="55" DISABLED />
                             </div>
                         </div>
@@ -1590,10 +1590,10 @@
                                     </div>
                                     <label>Boxcar Token</label>
                                     <input type="text" name="boxcar_token" value="${config['boxcar_token']}" size="30">
-                                    <div class="row">
-                                        <img name="boxcar_statusicon" id="boxcar_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                        <input type="button" value="Test Boxcar" id="boxcar_test" />
-                                   </div>
+                                    <span style="display: flex; align-items: center; margin: 5px 0;">
+                                        <img name="boxcar_statusicon" id="boxcar_statusicon" src="images/success.png" style="visibility:hidden;" height="20" width="20" />
+                                        <input type="button" value="Test Boxcar" id="boxcar_test" style="margin-left: 10px;" />
+                                    </span>
                             </div>
                         </div>
                      </fieldset>
@@ -1624,7 +1624,7 @@
                                     </div>
                                     <div align="center" class="row">
                                         <img name="pushbullet_statusicon" id="pushbullet_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                        <input type="button" value="Test Pushbullet" id="pushbullet_test" style="float:center" /></br>
+                                        <input type="button" value="Test Pushbullet" id="pushbullet_test" style="margin: 5px 0;" /></br>
                                         <input type="text" name="pbstatus" style="text-align:center; font-size:11px;" id="pbstatus" size="55" DISABLED />
                                    </div>
                                 </div>
@@ -1650,7 +1650,7 @@
                              </div>
                              <div align="center" class="row">
                                  <img name="telegram_statusicon" id="telegram_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                 <input type="button" value="Test Telegram" id="telegram_test" style="float:center" /></br>
+                                 <input type="button" value="Test Telegram" id="telegram_test" style="margin: 5px 0;" /></br>
                                  <input type="text" name="telegramstatus" style="text-align:center; font-size:11px;" id="telegramstatus" size="55" DISABLED />
                              </div>
                         </div>
@@ -1670,7 +1670,7 @@
                             </div>
                             <div align="center" class="row">
                                 <img name="slack_statusicon" id="slack_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                <input type="button" value="Test Slack" id="slack_test" style="float:center" /></br>
+                                <input type="button" value="Test Slack" id="slack_test" style="margin: 5px 0;" /></br>
                                 <input type="text" name="slackstatus" style="text-align:center; font-size:11px;" id="slackstatus" size="55" DISABLED />
                             </div>
                         </div>
@@ -1690,7 +1690,7 @@
                             </div>
                             <div align="center" class="row">
                                 <img name="mattermost_statusicon" id="mattermost_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                <input type="button" value="Test Mattermost" id="mattermost_test" style="float:center" /></br>
+                                <input type="button" value="Test Mattermost" id="mattermost_test" style="margin: 5px 0;" /></br>
                                 <input type="text" name="mattermoststatus" style="text-align:center; font-size:11px;" id="mattermoststatus" size="55" DISABLED />
                             </div>
                         </div>
@@ -1710,7 +1710,7 @@
                             </div>
                             <div align="center" class="row">
                                 <img name="discord_statusicon" id="discord_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                <input type="button" value="Test Discord" id="discord_test" style="float:center" /></br>
+                                <input type="button" value="Test Discord" id="discord_test" style="margin: 5px 0;" /></br>
                                 <input type="text" name="discordstatus" style="text-align:center; font-size:11px;" id="discordstatus" size="55" DISABLED />
                             </div>
                         </div>
@@ -1762,7 +1762,7 @@
                             </div>
                             <div align="center" class="row">
                                 <img name="email_statusicon" id="email_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                <input type="button" value="Test Email" id="email_test" style="float:center" /></br>
+                                <input type="button" value="Test Email" id="email_test" style="margin: 5px 0;" /></br>
                                 <input type="text" name="emailstatus" style="text-align:center; font-size:11px;" id="emailstatus" size="55" DISABLED />
                             </div>
                         </div>
@@ -1785,7 +1785,7 @@
                             </div>
                             <div align="center" class="row">
                                 <img name="gotify_statusicon" id="gotify_statusicon" src="images/success.png" style="float:right;visibility:hidden;" height="20" width="20" />
-                                <input type="button" value="Test Gotify" id="gotify_test" style="float:center" /></br>
+                                <input type="button" value="Test Gotify" id="gotify_test" style="margin: 5px 0;" /></br>
                                 <input type="text" name="gotifystatus" style="text-align:center; font-size:11px;" id="gotifystatus" size="55" DISABLED />
                             </div>
                         </div>
