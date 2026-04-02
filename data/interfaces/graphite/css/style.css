@@ -644,6 +644,18 @@ footer {
     padding: 80px 10px 10px 10px !important;
   }
   
+  /* Stack menu items vertically on mobile */
+  #mobile_menu_items {
+    flex-direction: column !important;
+  }
+  
+  #mobile_menu_items a {
+    flex: none !important;
+    min-width: auto !important;
+    width: 100% !important;
+    margin-bottom: 2px !important;
+  }
+  
   /* Make Queue table wider on mobile */
   #tabs-4 table[summary="Queue Status"] {
     min-width: 600px !important;
