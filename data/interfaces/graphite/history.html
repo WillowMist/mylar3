@@ -9,13 +9,13 @@
 <%def name="body()">
         <input type="hidden" id="page_name" value="history" />
         <div style="margin-top:60px;">
-        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=all',$(this),'table')" data-success="All History cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear All History</a>
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Processed',$(this),'table')" data-success="All Processed cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear Processed</a>
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Unprocessed',$(this),'table')" data-success="All Unprocessed cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear Unprocessed</a>
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Snatched',$(this),'table')" data-success="All Snatched cleared" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear Snatched</a>
-                        <a id="menu_link_delete" href="#" onclick="doAjaxCall('wipenzblog',$(this),'table')" data-success="Wiped entire NZB DB" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Wipe NZBLOG</a>
-                        <a id="menu_link_delete" href="logs" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">View Logs</a>
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:5px;padding:10px;justify-content:center;">
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=all',$(this),'table')" data-success="All History cleared" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Clear All History</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Processed',$(this),'table')" data-success="All Processed cleared" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Clear Processed</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Unprocessed',$(this),'table')" data-success="All Unprocessed cleared" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Clear Unprocessed</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('clearhistory?status_type=Snatched',$(this),'table')" data-success="All Snatched cleared" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Clear Snatched</a>
+                        <a id="menu_link_delete" href="#" onclick="doAjaxCall('wipenzblog',$(this),'table')" data-success="Wiped entire NZB DB" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Wipe NZBLOG</a>
+                        <a id="menu_link_delete" href="logs" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">View Logs</a>
 		</div>
         </div>
 	<div id="paddingheader">

@@ -11,10 +11,10 @@
 <%def name="body()">
         <input type="hidden" id="page_name" value="weekly" />
         <div style="margin-top:60px;">
-        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
-                        <a href="#" id="menu_link_refresh" onclick="doAjaxCall('pullist?week=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Refresh submitted." style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Refresh Pull-list</a>
-                        <a href="#" id="menu_link_retry" onclick="doAjaxCall('pullrecreate?weeknumber=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Recreating Pullist for week ${weekinfo['weeknumber']}, ${weekinfo['year']}" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Recreate Pull-list</a>
-                        <a href="#" id="menu_link_delete" title="Add all series to your watchlist for week ${weekinfo['weeknumber']}" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;" onclick="$('#publisher_dialog').dialog('open');">Mass.Add.it.All.NOW</a>
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:5px;padding:10px;justify-content:center;">
+                        <a href="#" id="menu_link_refresh" onclick="doAjaxCall('pullist?week=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Refresh submitted." style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Refresh Pull-list</a>
+                        <a href="#" id="menu_link_retry" onclick="doAjaxCall('pullrecreate?weeknumber=${weekinfo['weeknumber']}&year=${weekinfo['year']}',$(this),'table')" data-success="Recreating Pullist for week ${weekinfo['weeknumber']}, ${weekinfo['year']}" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Recreate Pull-list</a>
+                        <a href="#" id="menu_link_delete" title="Add all series to your watchlist for week ${weekinfo['weeknumber']}" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;" onclick="$('#publisher_dialog').dialog('open');">Mass.Add.it.All.NOW</a>
         </div>
         </div>
         <a href="home" class="back">&laquo; Back to overview</a>

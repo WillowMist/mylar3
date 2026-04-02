@@ -12,13 +12,13 @@
 <%def name="body()">
         <input type="hidden" id="page_name" value="reading_list" />
         <div style="margin-top:60px;">
-        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;">
+        <div id="mobile_menu_items" style="width:100%;background:#2c3e50;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:5px;padding:10px;justify-content:center;">
                         %if mylar.CONFIG.TAB_ENABLE:
-      			    <a id="menu_link_delete" href="#" onclick="doAjaxCall('syncfiles',$(this),'table')" data-success="Syncing complete." style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Sync</a>
+      			    <a id="menu_link_delete" href="#" onclick="doAjaxCall('syncfiles',$(this),'table')" data-success="Syncing complete." style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Sync</a>
                         %endif
-			<a id="menu_link_delete" href="#" onclick="doAjaxCall('removefromreadlist?AllRead=1',$(this),'table')" data-success="All Read Records Removed" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Remove Read</a>
-			<a id="menu_link_delete" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Force New Check</a>
-                        <a id="menu_link_refresh" href="#" style="display:block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;margin-bottom:2px;border-radius:4px;">Clear File Cache</a>
+			<a id="menu_link_delete" href="#" onclick="doAjaxCall('removefromreadlist?AllRead=1',$(this),'table')" data-success="All Read Records Removed" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Remove Read</a>
+			<a id="menu_link_delete" href="#" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Force New Check</a>
+                        <a id="menu_link_refresh" href="#" style="display:inline-block;padding:10px 15px;background:#34495e;color:#ecf0f1;text-decoration:none;border-radius:4px;flex:1;min-width:150px;text-align:center;white-space:nowrap;">Clear File Cache</a>
 		</div>
         </div>
 	<div id="paddingheader">
