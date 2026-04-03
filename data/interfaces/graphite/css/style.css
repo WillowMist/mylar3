@@ -572,9 +572,10 @@ footer {
 }
 #main {
   line-height: 24px;
-  margin: 0 auto;
-  padding: 75px 0 0;
-  width: 960px;
+  margin: 0 auto !important;
+  padding: 75px 20px 0 !important;
+  max-width: 1200px !important;
+  width: 100% !important;
 }
 
 /* Desktop: show menu normally, hide toggle button */
@@ -631,17 +632,248 @@ footer {
 }
 
 #tabs-4 table[summary="Queue Status"] {
-  min-width: 300px !important;
-  width: 300px !important;
-  margin: 0 auto !important;
-  display: table !important;
-}
+   min-width: 300px !important;
+   width: 300px !important;
+   margin: 0 auto !important;
+   display: table !important;
+ }
+ 
+ /* Center footer on desktop */
+ footer {
+   margin: 5px auto 50px auto !important;
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+ }
+ 
+ /* Ensure checkboxes in tabs are centered */
+ #tabs-5 .row.checkbox,
+ #tabs-5 form .row.checkbox,
+ #tabs-5 .row.checkbox.left,
+ #tabs-5 form .row.checkbox.left {
+   margin-left: 0 !important;
+   padding-left: 0 !important;
+   text-align: center !important;
+   justify-content: center !important;
+ }
+ 
+  /* Two-column layout for Advanced Settings tab on desktop */
+  #tabs-6 table.configtable {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  
+  #tabs-6 table.configtable tr {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 2rem !important;
+    width: 100% !important;
+  }
+  
+  #tabs-6 table.configtable td {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Two-column layout for Download Settings tab - NZB on left, Torrents on right */
+  #tabs-3 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Place first fieldset (Usenet legend) and its options on the left */
+  #tabs-3 > fieldset:nth-of-type(1),
+  #tabs-3 > fieldset:nth-of-type(2),
+  #tabs-3 > fieldset:nth-of-type(3),
+  #tabs-3 > fieldset:nth-of-type(4),
+  #tabs-3 > fieldset:nth-of-type(5),
+  #tabs-3 > fieldset:nth-of-type(6) {
+    grid-column: 1 !important;
+  }
+  
+  /* Place Torrents legend and options on the right */
+  #tabs-3 > fieldset:nth-of-type(7),
+  #tabs-3 > fieldset:nth-of-type(8),
+  #tabs-3 > fieldset:nth-of-type(9),
+  #tabs-3 > fieldset:nth-of-type(10),
+  #tabs-3 > fieldset:nth-of-type(11),
+  #tabs-3 > fieldset:nth-of-type(12),
+  #tabs-3 > fieldset:nth-of-type(13) {
+    grid-column: 2 !important;
+  }
+  
+  /* Stack multiple checkboxes vertically in Miscellaneous section */
+ #tabs-6 .row.checkbox,
+ #tabs-6 form .row.checkbox,
+ #tabs-6 .row.checkbox.left,
+ #tabs-6 form .row.checkbox.left {
+   flex-direction: column !important;
+   align-items: flex-start !important;
+ }
+ 
+  #tabs-6 .row.checkbox input[type="checkbox"],
+  #tabs-6 form .row.checkbox input[type="checkbox"],
+  #tabs-6 .row.checkbox.left input[type="checkbox"],
+  #tabs-6 form .row.checkbox.left input[type="checkbox"] {
+    margin-bottom: 0.5rem !important;
+  }
+  
+   /* Fix Edit Settings tab (tabs-2) layout */
+   #tabs-2 {
+     padding: 1em 1.4em !important;
+     border: 1px solid #34495e !important;
+     border-radius: 4px !important;
+   }
+  
+   /* Constrain selects and inputs in tabs-2 */
+   #tabs-2 select,
+   #tabs-2 input[type="text"],
+   #tabs-2 input[type="password"],
+   #tabs-2 input[type="number"] {
+     max-width: 300px !important;
+     width: auto !important;
+   }
+   
+   /* Increase font sizes in tabs-2 form */
+   #tabs-2 form .row label {
+     font-size: 14px !important;
+   }
+   
+   #tabs-2 select,
+   #tabs-2 input[type="text"],
+   #tabs-2 input[type="password"],
+   #tabs-2 input[type="number"] {
+     font-size: 14px !important;
+   }
+  
+  /* Fix row checkbox right alignment in tabs-2 */
+  #tabs-2 .row.checkbox.right,
+  #tabs-2 .row.checkbox.right.clearfix {
+    justify-content: flex-start !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+  
+  #tabs-2 .row.checkbox.right label {
+    margin-right: 0.5rem !important;
+    order: -1 !important;
+  }
+  
+   #tabs-2 .row.checkbox.right input[type="checkbox"],
+   #tabs-2 .row.checkbox.right select {
+     flex-shrink: 0 !important;
+   }
+   
+     /* Edit Settings tab (tabs-2) table layout - two columns */
+     #tabs-2 table.comictable {
+       display: flex !important;
+       flex-direction: row !important;
+       gap: 15px !important;
+       width: 100% !important;
+     }
+     
+     #tabs-2 table.comictable tr {
+       display: flex !important;
+       flex-direction: row !important;
+       gap: 15px !important;
+       width: 100% !important;
+       margin-bottom: 0 !important;
+       border: none !important;
+       padding: 0 !important;
+     }
+     
+     #tabs-2 table.comictable td {
+       display: block !important;
+       flex: 1 !important;
+       padding: 0 !important;
+       width: auto !important;
+       margin-bottom: 0 !important;
+       margin-left: 0 !important;
+       margin-right: 0 !important;
+     }
+     
+     #tabs-2 table.comictable td#mainimg {
+       flex: 0 0 auto !important;
+       width: 263px !important;
+       padding: 0 !important;
+       margin: 0 !important;
+     }
+     
+     #tabs-2 table.comictable td:last-child {
+       padding: 0 0 0 20px !important;
+       margin: 0 !important;
+     }
+     
+     #tabs-2 table.comictable td:last-child fieldset {
+       padding: 0 !important;
+       margin: 0 !important;
+     }
+     
+     /* Override Bootstrap row gutter inside tabs-2 form */
+     #tabs-2 form .row {
+       margin-left: 0 !important;
+       margin-right: 0 !important;
+     }
+   
+   /* Fix Year Options formatting - wrap radio buttons */
+   #tabs-2 .row:has(> input[type="radio"]) {
+     display: grid !important;
+     grid-template-columns: auto 1fr !important;
+     gap: 0.5rem 1rem !important;
+     align-items: start !important;
+     padding: 1rem !important;
+     border: 1px solid #34495e !important;
+     border-radius: 4px !important;
+     background: rgba(52, 73, 94, 0.1) !important;
+     width: fit-content !important;
+     max-width: 400px !important;
+   }
+   
+   #tabs-2 .row:has(> input[type="radio"]) label {
+     grid-column: 1 / -1 !important;
+     font-weight: bold !important;
+     margin-bottom: 0.5rem !important;
+   }
+   
+   #tabs-2 .row:has(> input[type="radio"]) input[type="radio"] {
+     margin: 0.25rem 0.5rem 0 0 !important;
+   }
 
 /* Override #main width on mobile for graphite */
 @media (max-width: 991px) {
   #main {
     width: 100% !important;
     padding: 80px 10px 10px 10px !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Constrain form containers */
+  form, fieldset, .form-group {
+    width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+  
+  table, table.configtable {
+    width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+  
+  /* Keep checkbox and label together */
+  .row.checkbox input[type="checkbox"],
+  .row.checkbox label {
+    display: inline !important;
+    margin-right: 5px !important;
   }
   
   /* Stack menu items vertically on mobile */
@@ -862,50 +1094,108 @@ footer {
       line-height: normal !important;
     }
     
-    form .row input[type=text],
-    form .row input[type=password],
-    form .row input[type=number],
-    form .row select,
-    form .row textarea {
-      display: block !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      margin-right: 0 !important;
-      margin-bottom: 0.5rem !important;
-    }
+     form .row input[type=text],
+     form .row input[type=password],
+     form .row input[type=number],
+     form .row select,
+     form .row textarea {
+       display: block !important;
+       width: 100% !important;
+       max-width: 100% !important;
+       box-sizing: border-box !important;
+       margin-right: 0 !important;
+       margin-bottom: 0.5rem !important;
+       min-width: 0 !important;
+     }
+     
+     /* Override size attribute and inline styles on all form inputs */
+     #main input[type=text],
+     #main input[type=password],
+     #main input[type=number],
+     #main input[type=email],
+     #main input[type=url],
+     #main input[type=search],
+     form input[type=text],
+     form input[type=password],
+     form input[type=number],
+     form input[type=email],
+     form input[type=url],
+     form input[type=search],
+     fieldset input[type=text],
+     fieldset input[type=password],
+     fieldset input[type=number],
+     fieldset input[type=email],
+     fieldset input[type=url],
+     fieldset input[type=search] {
+       width: 100% !important;
+       max-width: 100% !important;
+       min-width: 0 !important;
+       box-sizing: border-box !important;
+     }
     
-    /* EXCEPTIONS for checkboxes - keep them inline */
-    form .row.checkbox {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-    }
+     /* EXCEPTIONS for checkboxes - keep them inline */
+     form .row.checkbox {
+       display: flex !important;
+       flex-direction: row !important;
+       align-items: center !important;
+       float: none !important;
+       flex-wrap: nowrap !important;
+     }
+     
+     form .row.checkbox input[type="checkbox"] {
+       display: inline-block !important;
+       width: auto !important;
+       margin-right: 0.5rem !important;
+       margin-bottom: 0 !important;
+       float: none !important;
+       flex-shrink: 0 !important;
+     }
+     
+     form .row.checkbox label {
+       display: inline !important;
+       width: auto !important;
+       padding-bottom: 0 !important;
+       margin-bottom: 0 !important;
+       float: none !important;
+       flex-wrap: nowrap !important;
+     }
+     
+     /* Specific override for .left class checkboxes */
+     form .row.checkbox.left {
+       display: flex !important;
+       flex-direction: row !important;
+       align-items: center !important;
+       float: none !important;
+       flex-wrap: nowrap !important;
+     }
+     
+     form .row.checkbox.left input[type="checkbox"] {
+       display: inline-block !important;
+       width: auto !important;
+       margin-right: 0.5rem !important;
+       margin-bottom: 0 !important;
+       float: none !important;
+       flex-shrink: 0 !important;
+     }
+     
+     form .row.checkbox.left label {
+       display: inline !important;
+       width: auto !important;
+       padding-bottom: 0 !important;
+       margin-bottom: 0 !important;
+       float: none !important;
+     }
     
-    form .row.checkbox input[type="checkbox"] {
-      display: inline-block !important;
-      width: auto !important;
-      margin-right: 0.5rem !important;
-      margin-bottom: 0 !important;
-    }
-    
-    form .row.checkbox label {
-      display: inline !important;
-      width: auto !important;
-      padding-bottom: 0 !important;
-      margin-bottom: 0 !important;
-    }
-    
-    /* For nested checkboxes */
-    form .row .row.checkbox {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-      margin-left: 0 !important;
-      padding-left: 0 !important;
-    }
-    
-    /* For inline label+input combos like Auto-Search Interval */
+      /* For nested checkboxes */
+      form .row .row.checkbox {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+      }
+      
+      /* For inline label+input combos like Auto-Search Interval */
     form .row:has(> label:first-child):has(> input[type="text"]:first-of-type) label,
     form .row:has(> label:first-child):has(> input[type="text"]:first-of-type) input[type="text"] {
       display: inline-block !important;
@@ -931,12 +1221,15 @@ footer {
      text-align: center !important;
    }
    
-   table.comictable td#mainimg img {
-     margin: 0 auto !important;
-     display: block !important;
-   }
-   
-   /* Fix description and content positioning in Comic Details tab */
+    table.comictable td#mainimg img {
+      margin: 0 auto !important;
+      display: block !important;
+      max-width: 263px !important;
+      width: 100% !important;
+      height: auto !important;
+    }
+    
+     /* Fix description and content positioning in Comic Details tab */
    #tabs-1 img[src*="publisher"],
    #tabs-1 img[alt*="publisher"] {
      position: static !important;

@@ -414,9 +414,10 @@
 		}
 		
 		#main {
-			padding: 0.5rem !important;
-			margin: 0 !important;
-			margin-top: 0 !important;
+			padding: 75px 20px 0 !important;
+			margin: 0 auto !important;
+			max-width: 1200px !important;
+			width: 100% !important;
 		}
 		
 		body {
@@ -1314,6 +1315,60 @@
 			
 			.alphabet-mobile {
 				display: block !important;
+			}
+		}
+		
+		/* ============================================
+		   CHECKBOX/LABEL INLINE FIX (OVERRIDE BOOTSTRAP/GRID.SCSS)
+		   ============================================ */
+		
+		/* Checkboxes - keep inline on ALL screen sizes */
+		.row.checkbox,
+		form .row.checkbox,
+		.row.checkbox.left,
+		form .row.checkbox.left {
+			display: flex !important;
+			flex-direction: row !important;
+			align-items: center !important;
+			flex-wrap: nowrap !important;
+			gap: 0.5rem !important;
+			width: auto !important;
+			float: none !important;
+		}
+		
+		.row.checkbox input[type="checkbox"],
+		form .row.checkbox input[type="checkbox"],
+		.row.checkbox.left input[type="checkbox"],
+		form .row.checkbox.left input[type="checkbox"] {
+			display: inline-block !important;
+			width: auto !important;
+			height: auto !important;
+			margin: 0 !important;
+			flex-shrink: 0 !important;
+			flex-basis: auto !important;
+			float: none !important;
+		}
+		
+		.row.checkbox label,
+		form .row.checkbox label,
+		.row.checkbox.left label,
+		form .row.checkbox.left label {
+			display: inline !important;
+			width: auto !important;
+			padding: 0 !important;
+			margin: 0 !important;
+			line-height: normal !important;
+			font-size: inherit !important;
+			float: none !important;
+		}
+		
+		/* Desktop: center checkboxes */
+		@media (min-width: 992px) {
+			.row.checkbox,
+			form .row.checkbox,
+			.row.checkbox.left,
+			form .row.checkbox.left {
+				justify-content: center !important;
 			}
 		}
 	</style>
